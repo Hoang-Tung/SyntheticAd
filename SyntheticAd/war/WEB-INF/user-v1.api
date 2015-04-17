@@ -1,0 +1,307 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://even-envoy-89503.appspot.com/_ah/api",
+  "name" : "user",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://even-envoy-89503.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "user.userObjectManager.getUser" : {
+      "path" : "user/{email}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.UserObjectManager.getUser",
+      "request" : {
+        "parameters" : {
+          "email" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "user.createUser" : {
+      "path" : "createUser",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.UserObjectManager.createUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "User" : {
+        "id" : "User",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          },
+          "phone" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "$ref" : "DateFormat"
+          },
+          "point" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "DateFormat" : {
+        "id" : "DateFormat",
+        "type" : "object",
+        "properties" : {
+          "calendar" : {
+            "$ref" : "Calendar"
+          },
+          "numberFormat" : {
+            "$ref" : "NumberFormat"
+          },
+          "timeZone" : {
+            "$ref" : "TimeZone"
+          },
+          "lenient" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Calendar" : {
+        "id" : "Calendar",
+        "type" : "object",
+        "properties" : {
+          "time" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "lenient" : {
+            "type" : "boolean"
+          },
+          "firstDayOfWeek" : {
+            "type" : "integer"
+          },
+          "minimalDaysInFirstWeek" : {
+            "type" : "integer"
+          },
+          "timeInMillis" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "timeZone" : {
+            "$ref" : "TimeZone"
+          },
+          "calendarType" : {
+            "type" : "string"
+          },
+          "weekYear" : {
+            "type" : "integer"
+          },
+          "weeksInWeekYear" : {
+            "type" : "integer"
+          },
+          "weekDateSupported" : {
+            "type" : "boolean"
+          },
+          "fieldsComputed" : {
+            "type" : "integer"
+          },
+          "fieldsNormalized" : {
+            "type" : "integer"
+          },
+          "zoneShared" : {
+            "type" : "boolean"
+          },
+          "weekCountData" : {
+            "$ref" : "Locale"
+          }
+        }
+      },
+      "TimeZone" : {
+        "id" : "TimeZone",
+        "type" : "object",
+        "properties" : {
+          "displayName" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "rawOffset" : {
+            "type" : "integer"
+          },
+          "dstsavings" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "Locale" : {
+        "id" : "Locale",
+        "type" : "object",
+        "properties" : {
+          "language" : {
+            "type" : "string"
+          },
+          "country" : {
+            "type" : "string"
+          },
+          "displayCountry" : {
+            "type" : "string"
+          },
+          "displayLanguage" : {
+            "type" : "string"
+          },
+          "displayName" : {
+            "type" : "string"
+          },
+          "displayScript" : {
+            "type" : "string"
+          },
+          "displayVariant" : {
+            "type" : "string"
+          },
+          "extensionKeys" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "iso3Country" : {
+            "type" : "string"
+          },
+          "iso3Language" : {
+            "type" : "string"
+          },
+          "script" : {
+            "type" : "string"
+          },
+          "unicodeLocaleAttributes" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "unicodeLocaleKeys" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "variant" : {
+            "type" : "string"
+          }
+        }
+      },
+      "NumberFormat" : {
+        "id" : "NumberFormat",
+        "type" : "object",
+        "properties" : {
+          "groupingUsed" : {
+            "type" : "boolean"
+          },
+          "parseIntegerOnly" : {
+            "type" : "boolean"
+          },
+          "maximumIntegerDigits" : {
+            "type" : "integer"
+          },
+          "minimumIntegerDigits" : {
+            "type" : "integer"
+          },
+          "maximumFractionDigits" : {
+            "type" : "integer"
+          },
+          "minimumFractionDigits" : {
+            "type" : "integer"
+          },
+          "currency" : {
+            "$ref" : "Currency"
+          },
+          "roundingMode" : {
+            "$ref" : "RoundingMode"
+          }
+        }
+      },
+      "Currency" : {
+        "id" : "Currency",
+        "type" : "object",
+        "properties" : {
+          "currencyCode" : {
+            "type" : "string"
+          },
+          "displayName" : {
+            "type" : "string"
+          },
+          "symbol" : {
+            "type" : "string"
+          },
+          "defaultFractionDigits" : {
+            "type" : "integer"
+          },
+          "numericCode" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "RoundingMode" : {
+        "id" : "RoundingMode",
+        "type" : "string",
+        "enum" : [ "UP", "DOWN", "CEILING", "FLOOR", "HALF_UP", "HALF_DOWN", "HALF_EVEN", "UNNECESSARY" ]
+      }
+    },
+    "methods" : {
+      "com.kenshin.SyntheticAd.model.UserObjectManager.getUser" : {
+        "response" : {
+          "$ref" : "User"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.UserObjectManager.createUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
+        "response" : {
+          "$ref" : "User"
+        }
+      }
+    }
+  }
+}

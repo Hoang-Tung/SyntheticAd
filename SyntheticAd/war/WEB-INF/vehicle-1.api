@@ -1,0 +1,279 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://even-envoy-89503.appspot.com/_ah/api",
+  "name" : "vehicle",
+  "version" : "1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://even-envoy-89503.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "vehicle.vehicles" : {
+      "path" : "vehiclecollection/{offset}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getAll",
+      "request" : {
+        "parameters" : {
+          "offset" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vehicle.vehicleByCategoryAndLocation" : {
+      "path" : "vehiclecollection/{category_id}/{location_id}/{type}/{offset}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVihicleByCategoryAndLocation",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "location_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "type" : {
+            "type" : "string",
+            "required" : true
+          },
+          "offset" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vehicle.createVehicle" : {
+      "path" : "vehicle",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vehicle.updateVehicle" : {
+      "path" : "vehicle",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.updateViVehicle",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vehicle.deleteVehicle" : {
+      "path" : "vehicle/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "vehicle.vehicle" : {
+      "path" : "vehicle/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Vehicle" : {
+        "id" : "Vehicle",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "category_id" : {
+            "type" : "integer"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "condition" : {
+            "type" : "integer"
+          },
+          "user_id" : {
+            "type" : "integer"
+          },
+          "location_id" : {
+            "type" : "integer"
+          },
+          "lat" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "lon" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "extend_type" : {
+            "type" : "integer"
+          },
+          "care_num" : {
+            "type" : "integer"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "size" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "pass" : {
+            "type" : "string"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "integer"
+          },
+          "address" : {
+            "type" : "string"
+          },
+          "phone_num" : {
+            "type" : "string"
+          }
+        }
+      },
+      "VehicleCollection" : {
+        "id" : "VehicleCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Vehicle"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getAll" : {
+        "response" : {
+          "$ref" : "VehicleCollection"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVihicleByCategoryAndLocation" : {
+        "response" : {
+          "$ref" : "VehicleCollection"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle" : {
+        "request" : {
+          "$ref" : "Vehicle"
+        },
+        "response" : {
+          "$ref" : "Vehicle"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.updateViVehicle" : {
+        "request" : {
+          "$ref" : "Vehicle"
+        },
+        "response" : {
+          "$ref" : "Vehicle"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle" : {
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle" : {
+        "response" : {
+          "$ref" : "Vehicle"
+        }
+      }
+    }
+  }
+}

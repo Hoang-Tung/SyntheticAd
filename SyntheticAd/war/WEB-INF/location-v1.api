@@ -1,0 +1,89 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://even-envoy-89503.appspot.com/_ah/api",
+  "name" : "location",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://even-envoy-89503.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "location.locations" : {
+      "path" : "locationcollection",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.LocationObjectManager.getAll",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Location" : {
+        "id" : "Location",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "city" : {
+            "type" : "string"
+          },
+          "district" : {
+            "type" : "string"
+          },
+          "lon" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "lat" : {
+            "type" : "number",
+            "format" : "float"
+          }
+        }
+      },
+      "LocationCollection" : {
+        "id" : "LocationCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Location"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.kenshin.SyntheticAd.model.LocationObjectManager.getAll" : {
+        "response" : {
+          "$ref" : "LocationCollection"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<servlet>
+		<servlet-name>SyntheticAd</servlet-name>
+		<servlet-class>com.kenshin.SyntheticAd.SyntheticAdServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SyntheticAd</servlet-name>
+		<url-pattern>/syntheticad</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<servlet-name>Database</servlet-name>
+		<servlet-class>com.kenshin.SyntheticAd.DatabaseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Database</servlet-name>
+		<url-pattern>/database</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
+		<init-param>
+			<param-name>services</param-name>
+			<param-value>com.kenshin.SyntheticAd.model.CategoryObjectManager,com.kenshin.SyntheticAd.model.LocationObjectManager,com.kenshin.SyntheticAd.model.SessionObjectManager,com.kenshin.SyntheticAd.model.UserObjectManager,com.kenshin.SyntheticAd.model.VehicleObjectManager</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SystemServiceServlet</servlet-name>
+		<url-pattern>/_ah/spi/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>UpLoad</servlet-name>
+    <servlet-class>com.kenshin.SyntheticAd.UpLoad</servlet-class>
+  </servlet>
+ 
+  <servlet-mapping>
+    <servlet-name>UpLoad</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+ 
+</web-app>
