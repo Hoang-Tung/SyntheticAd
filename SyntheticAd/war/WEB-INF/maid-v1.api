@@ -24,6 +24,22 @@
     "maxAge" : 0
   },
   "methods" : {
+    "maid.createMaid" : {
+      "path" : "createMaid",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.createMaid",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "maid.getMaid" : {
       "path" : "maidcollection/{category_id}/{location_id}/{type}/{offset}",
       "httpMethod" : "GET",
@@ -52,22 +68,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "maid.createMaid" : {
-      "path" : "createMaid",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.createMaid",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -180,17 +180,17 @@
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.MaidObjectManager.getMaidLocationAndCategory" : {
-        "response" : {
-          "$ref" : "MaidCollection"
-        }
-      },
       "com.kenshin.SyntheticAd.model.MaidObjectManager.createMaid" : {
         "request" : {
           "$ref" : "Maid"
         },
         "response" : {
           "$ref" : "Maid"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.getMaidLocationAndCategory" : {
+        "response" : {
+          "$ref" : "MaidCollection"
         }
       }
     }
