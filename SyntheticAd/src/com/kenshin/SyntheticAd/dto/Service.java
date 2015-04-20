@@ -26,12 +26,17 @@ public class Service {
 	protected String address;
 	protected String phone_num;
 	
+	public Service() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = Integer.parseInt(id);
 	}
+	
 	public int getCategory_id() {
 		return category_id;
 	}
