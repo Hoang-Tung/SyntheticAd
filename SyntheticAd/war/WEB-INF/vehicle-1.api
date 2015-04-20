@@ -45,29 +45,17 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "vehicle.vehicleByCategoryAndLocation" : {
-      "path" : "vehiclecollection/{category_id}/{location_id}/{type}/{offset}",
-      "httpMethod" : "GET",
+    "vehicle.deleteVehicle" : {
+      "path" : "vehicle/{id}",
+      "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVihicleByCategoryAndLocation",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle",
       "request" : {
         "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "location_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "type" : {
-            "type" : "string",
-            "required" : true
-          },
-          "offset" : {
+          "id" : {
             "type" : "string",
             "required" : true
           }
@@ -75,7 +63,7 @@
         "body" : "empty"
       },
       "response" : {
-        "body" : "autoTemplate(backendResponse)"
+        "body" : "empty"
       }
     },
     "vehicle.vehicle" : {
@@ -131,17 +119,29 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "vehicle.deleteVehicle" : {
-      "path" : "vehicle/{id}",
-      "httpMethod" : "DELETE",
+    "vehicle.vehicleByCategoryAndLocation" : {
+      "path" : "vehiclecollection/{category_id}/{location_id}/{type}/{offset}",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVihicleByCategoryAndLocation",
       "request" : {
         "parameters" : {
-          "id" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "location_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "type" : {
+            "type" : "string",
+            "required" : true
+          },
+          "offset" : {
             "type" : "string",
             "required" : true
           }
@@ -149,7 +149,7 @@
         "body" : "empty"
       },
       "response" : {
-        "body" : "empty"
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -246,10 +246,7 @@
           "$ref" : "VehicleCollection"
         }
       },
-      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVihicleByCategoryAndLocation" : {
-        "response" : {
-          "$ref" : "VehicleCollection"
-        }
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle" : {
       },
       "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle" : {
         "response" : {
@@ -272,7 +269,10 @@
           "$ref" : "Vehicle"
         }
       },
-      "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle" : {
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVihicleByCategoryAndLocation" : {
+        "response" : {
+          "$ref" : "VehicleCollection"
+        }
       }
     }
   }
