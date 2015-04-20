@@ -99,5 +99,11 @@ public class ServiceObject {
 
 	}
 
-	
+	public ArrayList<Service> getServiceByCategoryAndLocation(String location, String category_id, String offset){
+		ArrayList<Service> datas = new ArrayList<Service>();
+		
+		
+		
+		return datas;
+	}
 }

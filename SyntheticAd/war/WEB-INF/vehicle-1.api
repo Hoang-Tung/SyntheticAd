@@ -78,17 +78,22 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "vehicle.createVehicle" : {
-      "path" : "vehicle",
-      "httpMethod" : "POST",
+    "vehicle.vehicle" : {
+      "path" : "vehicle/{id}",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -102,6 +107,22 @@
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.updateViVehicle",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "vehicle.createVehicle" : {
+      "path" : "vehicle",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -129,27 +150,6 @@
       },
       "response" : {
         "body" : "empty"
-      }
-    },
-    "vehicle.vehicle" : {
-      "path" : "vehicle/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -251,10 +251,7 @@
           "$ref" : "VehicleCollection"
         }
       },
-      "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle" : {
-        "request" : {
-          "$ref" : "Vehicle"
-        },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle" : {
         "response" : {
           "$ref" : "Vehicle"
         }
@@ -267,12 +264,15 @@
           "$ref" : "Vehicle"
         }
       },
-      "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle" : {
-      },
-      "com.kenshin.SyntheticAd.model.VehicleObjectManager.getVehicle" : {
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle" : {
+        "request" : {
+          "$ref" : "Vehicle"
+        },
         "response" : {
           "$ref" : "Vehicle"
         }
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle" : {
       }
     }
   }
