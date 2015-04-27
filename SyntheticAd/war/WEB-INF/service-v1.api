@@ -106,12 +106,10 @@
             "type" : "integer"
           },
           "lat" : {
-            "type" : "number",
-            "format" : "float"
+            "type" : "number"
           },
           "lon" : {
-            "type" : "number",
-            "format" : "float"
+            "type" : "number"
           },
           "extend_type" : {
             "type" : "integer"

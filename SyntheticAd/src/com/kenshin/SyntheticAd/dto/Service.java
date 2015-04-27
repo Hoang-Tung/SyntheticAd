@@ -13,8 +13,8 @@ public class Service {
 	protected int condition;
 	protected int user_id;
 	protected int location_id;
-	protected float lat;
-	protected float lon;
+	protected Double lat;
+	protected Double lon;
 	protected int extend_type;
 	protected int care_num;
 	protected String pass;
@@ -73,17 +73,17 @@ public class Service {
 	public void setLocation_id(String location_id) {
 		this.location_id = Integer.parseInt(location_id);
 	}
-	public float getLat() {
+	public Double getLat() {
 		return lat;
 	}
 	public void setLat(String lat) {
-		this.lat = Float.parseFloat(lat);
+		this.lat = Double.parseDouble(lat);
 	}
-	public float getLon() {
+	public Double getLon() {
 		return lon;
 	}
 	public void setLon(String lon) {
-		this.lon = Float.parseFloat(lon);
+		this.lon = Double.parseDouble(lon);
 	}
 	public int getExtend_type() {
 		return extend_type;

@@ -196,8 +196,10 @@ public class VehicleObject {
 				c.setCare_num(rs.getString("care_num"));
 				if (rs.getString("size") != null)
 					c.setSize(rs.getString("size"));
-				c.setCreated_at(rs.getString("created_at"));
-				c.setUpdated_at(rs.getString("updated_at"));
+				if(rs.getString("created_at") != null)
+					c.setCreated_at(rs.getString("created_at"));
+				if(rs.getString("updated_at") != null )
+					c.setUpdated_at(rs.getString("updated_at"));
 				c.setAddress(rs.getString("address"));
 				if (rs.getString("phone_num") != null)
 					c.setPhone_num(rs.getString("phone_num"));

@@ -16,8 +16,8 @@ public class Vehicle {
 	private int condition;
 	private int user_id;
 	private int location_id;
-	private float lat;
-	private float lon;
+	private Double lat;
+	private Double lon;
 	private int extend_type;
 	private int care_num;
 	private Date created_at;
@@ -71,17 +71,17 @@ public class Vehicle {
 	public void setLocation_id(String location_id) {
 		this.location_id = Integer.parseInt(location_id);
 	}
-	public float getLat() {
+	public Double getLat() {
 		return lat;
 	}
 	public void setLat(String lat) {
-		this.lat = Float.parseFloat(lat);
+		this.lat = Double.parseDouble(lat);
 	}
-	public float getLon() {
+	public Double getLon() {
 		return lon;
 	}
 	public void setLon(String lon) {
-		this.lon = Float.parseFloat(lon);
+		this.lon = Double.parseDouble(lon);
 	}
 	public int getExtend_type() {
 		return extend_type;

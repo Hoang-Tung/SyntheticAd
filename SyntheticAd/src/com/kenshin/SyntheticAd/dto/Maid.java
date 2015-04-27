@@ -99,12 +99,12 @@ public class Maid extends Service {
 		this.location_id = location_id;
 	}
 
-	public void setLat(float lat) {
+	public void setLat(Double lat) {
 		// TODO Auto-generated method stub
 		this.lat = lat;
 	}
 
-	public void setLon(float lon) {
+	public void setLon(Double lon) {
 		// TODO Auto-generated method stub
 		this.lon = lon;
 	}
