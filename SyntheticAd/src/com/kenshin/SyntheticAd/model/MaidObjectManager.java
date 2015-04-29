@@ -36,8 +36,6 @@ public class MaidObjectManager {
 	public Maid createMaid(Maid maid) throws Exception{
 		Maid n_maid = new Maid();
 		
-		
-		
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
@@ -47,7 +45,7 @@ public class MaidObjectManager {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+		n_maid = maid;
 		return n_maid;
 	}
 	

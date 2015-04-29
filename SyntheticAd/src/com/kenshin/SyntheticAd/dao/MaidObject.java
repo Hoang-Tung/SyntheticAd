@@ -1,11 +1,15 @@
 package com.kenshin.SyntheticAd.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import com.google.appengine.api.rdbms.AppEngineDriver;
+import com.google.appengine.api.utils.SystemProperty;
+import com.google.appengine.tools.util.Logging;
 import com.kenshin.SyntheticAd.database.Database;
 import com.kenshin.SyntheticAd.dto.Maid;
 import com.kenshin.SyntheticAd.dto.Service;
@@ -23,8 +27,7 @@ public class MaidObject extends ServiceObject {
 
 		Database database = new Database();
 		Connection cont = database.getConnect();
-		
-		
+
 		for (int i = 0; i < datas.size(); i++) {
 			Maid n_maid = new Maid();
 
@@ -45,13 +48,13 @@ public class MaidObject extends ServiceObject {
 			n_maid.setType(datas.get(i).getType());
 			n_maid.setUser_id(datas.get(i).getUser_id());
 			n_maid.setCare_num(datas.get(i).getCare_num());
-			
+
 			try {
 				PreparedStatement ps = cont
 						.prepareStatement("SELECT * FROM testcraighslist.maid WHERE maid.post_id = ?;");
-				
-				ps.setLong(1, datas.get(i).getId());	
-				
+
+				ps.setLong(1, datas.get(i).getId());
+
 				ResultSet rs = ps.executeQuery();
 
 				while (rs.next()) {
@@ -62,52 +65,52 @@ public class MaidObject extends ServiceObject {
 					System.out.println(rs.getString("time_end"));
 					n_maid.setEnd_time(rs.getString("time_end"));
 				}
-				
+
 			} catch (Exception e) {
 				// TODO: handle exception
 				throw e;
-			} 
+			}
 
 			maid_datas.add(n_maid);
 		}
-		
+
 		cont.close();
 		return maid_datas;
 	}
 
-	public Maid createMaid(Connection connection, Maid maid){
+	public Maid createMaid(Connection connection, Maid maid) {
 		Maid n_Maid = new Maid();
 		Service p_Service = new Service();
-		
+
 		try {
 			p_Service = createService(connection, maid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
-			
-			PreparedStatement ps = con.prepareStatement("INSERT INTO testcraighslist.maid (`category_id`, `post_id`, `area`, `time_start`, `time_end`) VALUES (?, ?, ?, ?, ?);");
+
+			PreparedStatement ps = con
+					.prepareStatement("INSERT INTO testcraighslist.maid (`category_id`, `post_id`, `area`, `time_start`, `time_end`) VALUES (?, ?, ?, ?, ?);");
 			ps.setLong(1, maid.getCategory_id());
 			ps.setLong(2, p_Service.getId());
 			ps.setLong(3, (long) maid.getArea());
-			
+
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
+
 			ps.setString(4, simpleDateFormat.format(maid.getStart_time()));
-			
+
 			ps.setString(5, simpleDateFormat.format(maid.getEnd_time()));
-			
+
 			ps.executeUpdate();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
 		return n_Maid;
 	}
 }
