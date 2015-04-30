@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.apache.tools.ant.types.CommandlineJava.SysProperties;
 
+import com.kenshin.SyntheticAd.dto.Title;
 import com.kenshin.SyntheticAd.dto.User;
 
 
@@ -86,4 +87,36 @@ public class UserObject {
 			if (con != null) con.close();
 		}
 	}
+	
+	public ArrayList<Title> getTitle(Connection connection, String user_id) throws Exception{
+ArrayList<Title> datas = new ArrayList<Title>();
+		
+		try {
+			
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM testcraighslist.title WHERE title.user_id = ?");
+			ps.setString(1, user_id);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Title t = new Title();
+				t.setCategory_id(rs.getString("category_id"));
+				t.setPost_id(rs.getString("post_id"));
+				t.setTitle(rs.getString("title"));
+				if (rs.getString("user_id") != null)
+					t.setUser_id(rs.getString("user_id"));
+				t.setLocation_id(rs.getString("location_id"));
+				t.setType(rs.getString("type"));
+				datas.add(t);
+			}
+			
+			return datas;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw e;
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+	}
+	
 }

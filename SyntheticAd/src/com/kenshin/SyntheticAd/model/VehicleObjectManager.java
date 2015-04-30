@@ -13,7 +13,7 @@ import com.kenshin.SyntheticAd.dao.VehicleObject;
 import com.kenshin.SyntheticAd.dto.Category;
 import com.kenshin.SyntheticAd.dto.Vehicle;
 
-@Api(name = "vehicle", version = "1")
+@Api(name = "vehivle", version = "v1")
 public class VehicleObjectManager {
 	@ApiMethod(name = "vehicles")
 	public ArrayList<Vehicle> getAll(@Named("offset") String offset)

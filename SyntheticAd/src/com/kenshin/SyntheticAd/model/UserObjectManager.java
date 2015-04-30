@@ -1,6 +1,7 @@
 package com.kenshin.SyntheticAd.model;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import sun.misc.BASE64Decoder;
 
@@ -10,6 +11,7 @@ import com.google.api.server.spi.config.Named;
 import com.kenshin.SyntheticAd.dao.UserObject;
 import com.kenshin.SyntheticAd.dao.VehicleObject;
 import com.kenshin.SyntheticAd.database.Database;
+import com.kenshin.SyntheticAd.dto.Title;
 import com.kenshin.SyntheticAd.dto.User;
 import com.kenshin.SyntheticAd.dto.Vehicle;
 

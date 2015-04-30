@@ -28,7 +28,7 @@
 		<servlet-class>com.google.api.server.spi.SystemServiceServlet</servlet-class>
 		<init-param>
 			<param-name>services</param-name>
-			<param-value>com.kenshin.SyntheticAd.model.CategoryObjectManager,com.kenshin.SyntheticAd.model.LocationObjectManager,com.kenshin.SyntheticAd.model.MaidObjectManager,com.kenshin.SyntheticAd.model.ServiceObjectManager,com.kenshin.SyntheticAd.model.SessionObjectManager,com.kenshin.SyntheticAd.model.UserObjectManager,com.kenshin.SyntheticAd.model.VehicleObjectManager</param-value>
+			<param-value>com.kenshin.SyntheticAd.model.CategoryObjectManager,com.kenshin.SyntheticAd.model.LocationObjectManager,com.kenshin.SyntheticAd.model.MaidObjectManager,com.kenshin.SyntheticAd.model.ServiceObjectManager,com.kenshin.SyntheticAd.model.SessionObjectManager,com.kenshin.SyntheticAd.model.TitleObjectManager,com.kenshin.SyntheticAd.model.UserObjectManager,com.kenshin.SyntheticAd.model.VehicleObjectManager</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

@@ -67,7 +67,15 @@ public class VehicleObject {
 				connection.close();
 		}
 	}
-	
+
+	public ArrayList<Vehicle> searchVehicle(Connection connection,
+			String title, String category_id, String location_id, String type)
+			throws Exception {
+		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
+		
+		return datas;
+	}
+
 	public Vehicle getVehicle(Connection connection, String location_id)
 			throws Exception {
 		Vehicle vehicle = new Vehicle();
@@ -196,9 +204,9 @@ public class VehicleObject {
 				c.setCare_num(rs.getString("care_num"));
 				if (rs.getString("size") != null)
 					c.setSize(rs.getString("size"));
-				if(rs.getString("created_at") != null)
+				if (rs.getString("created_at") != null)
 					c.setCreated_at(rs.getString("created_at"));
-				if(rs.getString("updated_at") != null )
+				if (rs.getString("updated_at") != null)
 					c.setUpdated_at(rs.getString("updated_at"));
 				c.setAddress(rs.getString("address"));
 				if (rs.getString("phone_num") != null)
@@ -332,11 +340,14 @@ public class VehicleObject {
 				if (result.next()) {
 
 					PreparedStatement ps1 = connection
-							.prepareStatement("INSERT INTO `testcraighslist`.`title` (`category_id`, `post_id`, `title`)"
-									+ " VALUES (?, ?, ?);");
+							.prepareStatement("INSERT INTO `testcraighslist`.`title` (`category_id`, `post_id`, `title`, `user_id`, `location_id`, `type`)"
+									+ " VALUES (?, ?, ?, ?, ?, ?);");
 					ps1.setLong(1, vehicle.getCategory_id());
 					ps1.setLong(2, result.getLong(1));
 					ps1.setString(3, vehicle.getTitle());
+					ps1.setLong(4, vehicle.getUser_id());
+					ps1.setLong(5, vehicle.getLocation_id());
+					ps1.setLong(6, vehicle.getType());
 					ps1.executeUpdate();
 				}
 
@@ -376,21 +387,22 @@ public class VehicleObject {
 	}
 
 	public ArrayList<Vehicle> getByDistance(Connection connection, Double lat,
-			Double lon, Double distance,int offset) {
+			Double lon, Double distance, int offset) {
 		// TODO Auto-generated method stub
 		
 		return null;
 	}
-	
-	public double distance(double lat1, double lng1, double lat2, double lng2){
-		double earthRadius = 6371000; //meters
-	    double dLat = Math.toRadians(lat2-lat1);
-	    double dLng = Math.toRadians(lng2-lng1);
-	    double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-	               Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-	               Math.sin(dLng/2) * Math.sin(dLng/2);
-	    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-	    double dist = (earthRadius * c);
-	    return dist;
+
+	public double distance(double lat1, double lng1, double lat2, double lng2) {
+		double earthRadius = 6371000; // meters
+		double dLat = Math.toRadians(lat2 - lat1);
+		double dLng = Math.toRadians(lng2 - lng1);
+		double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+				+ Math.cos(Math.toRadians(lat1))
+				* Math.cos(Math.toRadians(lat2)) * Math.sin(dLng / 2)
+				* Math.sin(dLng / 2);
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		double dist = (earthRadius * c);
+		return dist;
 	}
 }

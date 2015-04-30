@@ -1,0 +1,107 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://even-envoy-89503.appspot.com/_ah/api",
+  "name" : "title",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://even-envoy-89503.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "title.titleByKeyword" : {
+      "path" : "titlecollection",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TitleObjectManager.getTitleByKeyword",
+      "request" : {
+        "parameters" : {
+          "keyword" : {
+            "type" : "string",
+            "required" : false
+          },
+          "location_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "type" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Title" : {
+        "id" : "Title",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "category_id" : {
+            "type" : "integer"
+          },
+          "post_id" : {
+            "type" : "integer"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "user_id" : {
+            "type" : "integer"
+          },
+          "location_id" : {
+            "type" : "integer"
+          },
+          "type" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "TitleCollection" : {
+        "id" : "TitleCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Title"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.kenshin.SyntheticAd.model.TitleObjectManager.getTitleByKeyword" : {
+        "response" : {
+          "$ref" : "TitleCollection"
+        }
+      }
+    }
+  }
+}
