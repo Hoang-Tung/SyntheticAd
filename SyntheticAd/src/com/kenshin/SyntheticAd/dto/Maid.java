@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Maid extends Service {
+public class Maid extends Job {
 	private int maid_id;
 	private int category_id;
 	private int post_id;
@@ -134,6 +134,21 @@ public class Maid extends Service {
 		this.care_num = care_num;
 	}
 	
-	
+	public Job createJob(){
+		Job n_Job = new Job();
+		
+		n_Job.setAddress(this.getAddress());
+		n_Job.setCare_num(String.valueOf(this.getCare_num()));
+		n_Job.setCategory_id(String.valueOf(this.getCategory_id()));
+		n_Job.setCondition(String.valueOf(this.getCondition()));
+		n_Job.setDescription(this.getDescription());
+		n_Job.setPrice(String.valueOf(this.getPrice()));
+		n_Job.setPhone_num(this.getPhone_num());
+		n_Job.setType(String.valueOf(this.getType()));
+		n_Job.setTitle(this.getTitle());
+		n_Job.setSize(String.valueOf(this.getSize()));
+		
+		return n_Job;
+	}
 	
 }

@@ -18,7 +18,7 @@ import com.kenshin.SyntheticAd.dto.Vehicle;
 @Api(name="user",version="v1")
 public class UserObjectManager {
 	
-	@ApiMethod(name="createUser")
+	@ApiMethod(name="createuser")
 	public User createUser(User user) throws Exception{
 		User n_User = new User();
 		Database database = new Database();
@@ -32,6 +32,7 @@ public class UserObjectManager {
 		}
 		return n_User;
 	}
+	
 	
 	public User getUser(@Named("email")String email){
 		User n_User = new User();

@@ -5,21 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import com.kenshin.SyntheticAd.dto.Post;
-import com.kenshin.SyntheticAd.dto.Service;
+import com.kenshin.SyntheticAd.dto.Job;
+import com.kenshin.SyntheticAd.dto.Job;
 
-
-public class ServiceObject {
-
-	public ArrayList<Service> getAll(Connection connection) throws Exception {
-		ArrayList<Service> datas = new ArrayList<Service>();
+public class JobObject {
+	public ArrayList<Job> getAll(Connection connection) throws Exception {
+		ArrayList<Job> datas = new ArrayList<Job>();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("SELECT * FROM testcraighslist.service");
+					.prepareStatement("SELECT * FROM testcraighslist.job");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Service c = new Service();
+				Job c = new Job();
 				c.setId(rs.getString("id"));
 				System.out.println(rs.getString("id"));
 
@@ -99,14 +97,14 @@ public class ServiceObject {
 
 	}
 
-	public ArrayList<Service> getServiceByCategoryAndLocation(
-			Connection connection, String category_id, String location,
-			String type, String offset) throws Exception {
-		ArrayList<Service> datas = new ArrayList<Service>();
+	public ArrayList<Job> getJobByCategoryAndLocation(Connection connection,
+			String category_id, String location, String type, String offset)
+			throws Exception {
+		ArrayList<Job> datas = new ArrayList<Job>();
 
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("SELECT * FROM testcraighslist.service WHERE service.category_id = ? AND service.location_id = ? AND service.type = ? LIMIT 10 OFFSET ?;");
+					.prepareStatement("SELECT * FROM testcraighslist.job WHERE job.category_id = ? AND job.location_id = ? AND job.type = ? LIMIT 10 OFFSET ?;");
 			ps.setLong(1, Long.parseLong(category_id));
 			ps.setLong(2, Long.parseLong(location));
 			ps.setLong(3, Long.parseLong(type));
@@ -114,7 +112,7 @@ public class ServiceObject {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Service c = new Service();
+				Job c = new Job();
 				c.setId(rs.getString("id"));
 				System.out.println(rs.getString("id"));
 
@@ -193,27 +191,27 @@ public class ServiceObject {
 		}
 	}
 
-	public Service createService(Connection connection, Service service) throws Exception{
-		Service n_Service = new Service();
-		
+	public Job createJob(Connection connection, Job job) throws Exception {
+		Job n_Job = new Job();
+
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("INSERT INTO `testcraighslist`.`service` (`category_id`,"
+					.prepareStatement("INSERT INTO `testcraighslist`.`job` (`category_id`,"
 							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`) "
 							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			ps.setLong(1, service.getCategory_id());
-			ps.setString(2, service.getTitle());
-			ps.setString(3, service.getDescription());
-			ps.setLong(4, (long) service.getPrice());
-			ps.setLong(5, service.getCondition());
-			ps.setLong(6, service.getUser_id());
-			ps.setLong(7, service.getType());
-			ps.setLong(8, service.getLocation_id());
-			ps.setString(9, service.getPass());
-			ps.setString(10, service.getImageUrl());
-			ps.setString(11, service.getAddress());
-			if (service.getPhone_num() != null) {
-				ps.setString(12, service.getPhone_num());
+			ps.setLong(1, job.getCategory_id());
+			ps.setString(2, job.getTitle());
+			ps.setString(3, job.getDescription());
+			ps.setLong(4, (long) job.getPrice());
+			ps.setLong(5, job.getCondition());
+			ps.setLong(6, job.getUser_id());
+			ps.setLong(7, job.getType());
+			ps.setLong(8, job.getLocation_id());
+			ps.setString(9, job.getPass());
+			ps.setString(10, job.getImageUrl());
+			ps.setString(11, job.getAddress());
+			if (job.getPhone_num() != null) {
+				ps.setString(12, job.getPhone_num());
 			} else {
 				ps.setString(12, "");
 			}
@@ -222,27 +220,26 @@ public class ServiceObject {
 
 			try {
 				ResultSet result = ps.getGeneratedKeys();
-				
+
 				if (result.next()) {
 
 					PreparedStatement ps1 = connection
 							.prepareStatement("INSERT INTO `testcraighslist`.`title` (`category_id`, `post_id`, `title`)"
 									+ " VALUES (?, ?, ?);");
-					ps1.setLong(1, service.getCategory_id());
+					ps1.setLong(1, job.getCategory_id());
 					ps1.setLong(2, result.getLong(1));
-					n_Service.setId(result.getString(1));
-					ps1.setString(3, service.getTitle());
+					n_Job.setId(result.getString(1));
+					ps1.setString(3, job.getTitle());
 					ps1.executeUpdate();
-					
-					
+
 				}
 
 			} catch (Exception e) {
 				// TODO: handle exception
 				throw e;
 			}
-			
-			return n_Service;
+
+			return n_Job;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -250,8 +247,143 @@ public class ServiceObject {
 			if (connection != null)
 				connection.close();
 		}
+
+		return n_Job;
+	}
+
+	public Job updateJob(Connection connection, Job job) throws Exception {
+		// TODO Auto-generated method stub
+		Job nJob = new Job();
+
+		try {
+			String queryToJob = "UPDATE `testcraighslist`.`Job` SET ";
+			StringBuilder build = new StringBuilder(queryToJob);
+
+			if (job.getTitle() != null) {
+				build.append("`title`= '" + job.getTitle() + "',");
+			}
+
+			if (job.getDescription() != null) {
+				build.append("`description` = '" + job.getDescription() + "',");
+			}
+
+			if (job.getPrice() != 0) {
+				build.append(" `price` = '" + job.getPrice() + "',");
+			}
+
+			if (job.getCondition() != 0) {
+				build.append(" `condition` = '" + job.getCondition() + "',");
+			}
+
+			if (job.getType() != 0) {
+				build.append(" `type` = '" + job.getType() + "',");
+			}
+
+			if (job.getLocation_id() != 0) {
+				build.append(" `location_id` = '" + job.getLocation_id() + "',");
+			}
+
+			if (job.getLat() != 0) {
+				build.append(" `lat` = '" + job.getLat() + "',");
+			}
+
+			if (job.getLon() != 0) {
+				build.append(" `lon` = '" + job.getLon() + "',");
+			}
+
+			if (job.getCare_num() != 0) {
+				build.append(" `care_num` = '" + job.getCare_num() + "',");
+			}
+
+			if (job.getSize() != 0) {
+				build.append(" `size` = '" + job.getSize() + "',");
+			}
+
+			if (job.getPass() != null) {
+				build.append(" `pass` = '" + job.getPass() + "',");
+			}
+
+			if (job.getAddress() != null) {
+				build.append(" `address` = '" + job.getAddress() + "',");
+			}
+
+			if (job.getPhone_num() != null) {
+				build.append(" `phone_num` = '" + job.getPhone_num() + "',");
+			}
+
+			build.deleteCharAt(build.length() - 1);
+
+			build.append("WHERE `id` = '" + job.getId() + "';");
+
+			System.out.println(build.toString());
+
+			PreparedStatement ps = connection
+					.prepareStatement(build.toString());
+			System.out.println(ps.executeUpdate());
+
+			String queryToTitle = "UPDATE `testcraighslist`.`Job` SET ";
+			StringBuilder build1 = new StringBuilder(queryToTitle);
+
+			if (job.getTitle() != null) {
+				build1.append("`title`= '" + job.getTitle() + "',");
+			}
+			if (job.getType() != 0) {
+				build1.append(" `type` = '" + job.getType() + "',");
+			}
+
+			if (job.getLocation_id() != 0) {
+				build1.append(" `location_id` = '" + job.getLocation_id()
+						+ "',");
+			}
+			
+			build.deleteCharAt(build.length() - 1);
+
+			build.append("WHERE `post_id` = '" + job.getId() + "AND `category_id`= '" + job.getCategory_id() + "';");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+
+		return nJob;
+	}
+	
+	public boolean deleteJob(Connection connection, String post_id) throws Exception {
 		
-		return n_Service;
+		try {
+			PreparedStatement ps2 = connection.prepareStatement("SELECT job.category_id FROM `testcraighslist`.`job` WHERE `id`=?;");
+			ps2.setString(1, post_id);
+			
+			ResultSet rs = ps2.executeQuery();
+			
+			String category_id = null;
+			if(rs.next())
+				category_id = rs.getString(1);
+			System.out.println("delete category_id: " + category_id);
+				 
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM `testcraighslist`.`job` WHERE `id`=?;");
+			ps.setString(1, post_id);
+			
+			System.out.println(ps.executeUpdate());
+			
+			PreparedStatement ps1 = connection.prepareStatement("DELETE FROM `testcraighslist`.`title` WHERE `post_id`= ? AND `category_id` = ?;");
+			ps1.setString(1, post_id);
+			ps1.setString(2, category_id);
+			
+			System.out.println(ps1.executeUpdate());
+			
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+		return true;
 	}
 	
 }

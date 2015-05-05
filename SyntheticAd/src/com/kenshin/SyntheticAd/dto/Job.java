@@ -5,26 +5,30 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Job {
-	private int id;
-	private int category_id;
-	private String title;
-	private String description;
-	private float price;
-	private int condition;
-	private int user_id;
-	private int location_id;
-	private float lat;
-	private float lon;
-	private int extend_type;
-	private int care_num;
-	private Date created_at;
-	private Date updated_at;
-	private float size;
-	private String pass;
-	private String imageUrl;
-	private int type;
-	private String address;
-	private String phone_num;
+	protected int id;
+	protected int category_id;
+	protected String title;
+	protected String description;
+	protected float price;
+	protected int condition;
+	protected int user_id;
+	protected int location_id;
+	protected Double lat;
+	protected Double lon;
+	protected int extend_type;
+	protected int care_num;
+	protected String pass;
+	protected Date created_at;
+	protected Date updated_at;
+	protected float size;
+	protected String imageUrl;
+	protected int type;
+	protected String address;
+	protected String phone_num;
+	
+	public Job() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public int getId() {
 		return id;
@@ -32,6 +36,7 @@ public class Job {
 	public void setId(String id) {
 		this.id = Integer.parseInt(id);
 	}
+	
 	public int getCategory_id() {
 		return category_id;
 	}
@@ -68,17 +73,17 @@ public class Job {
 	public void setLocation_id(String location_id) {
 		this.location_id = Integer.parseInt(location_id);
 	}
-	public float getLat() {
+	public Double getLat() {
 		return lat;
 	}
 	public void setLat(String lat) {
-		this.lat = Float.parseFloat(lat);
+		this.lat = Double.parseDouble(lat);
 	}
-	public float getLon() {
+	public Double getLon() {
 		return lon;
 	}
 	public void setLon(String lon) {
-		this.lon = Float.parseFloat(lon);
+		this.lon = Double.parseDouble(lon);
 	}
 	public int getExtend_type() {
 		return extend_type;
@@ -141,12 +146,6 @@ public class Job {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getPass() {
-		return pass;
-	}
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -158,5 +157,13 @@ public class Job {
 	}
 	public void setPhone_num(String phone_num) {
 		this.phone_num = phone_num;
+	}
+	public void setPass(String pass) {
+		// TODO Auto-generated method stub
+		this.pass = pass;
+	}
+	
+	public String getPass() {
+		return pass;
 	}
 }

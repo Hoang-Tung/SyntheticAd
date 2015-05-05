@@ -250,14 +250,14 @@
           "displayName" : {
             "type" : "string"
           },
-          "symbol" : {
-            "type" : "string"
-          },
           "defaultFractionDigits" : {
             "type" : "integer"
           },
           "numericCode" : {
             "type" : "integer"
+          },
+          "symbol" : {
+            "type" : "string"
           }
         }
       },

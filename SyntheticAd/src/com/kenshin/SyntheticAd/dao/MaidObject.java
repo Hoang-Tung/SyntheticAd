@@ -12,17 +12,17 @@ import com.google.appengine.api.utils.SystemProperty;
 import com.google.appengine.tools.util.Logging;
 import com.kenshin.SyntheticAd.database.Database;
 import com.kenshin.SyntheticAd.dto.Maid;
-import com.kenshin.SyntheticAd.dto.Service;
+import com.kenshin.SyntheticAd.dto.Job;
 
-public class MaidObject extends ServiceObject {
+public class MaidObject extends JobObject {
 
 	public ArrayList<Maid> getMaidByCategoryAndLocation(Connection connection,
 			String category_id, String location_id, String type, String offset)
 			throws Exception {
-		ArrayList<Service> datas = new ArrayList<Service>();
+		ArrayList<Job> datas = new ArrayList<Job>();
 		ArrayList<Maid> maid_datas = new ArrayList<Maid>();
 
-		datas = this.getServiceByCategoryAndLocation(connection, category_id,
+		datas = this.getJobByCategoryAndLocation(connection, category_id,
 				location_id, type, offset);
 
 		Database database = new Database();
@@ -80,10 +80,10 @@ public class MaidObject extends ServiceObject {
 
 	public Maid createMaid(Connection connection, Maid maid) {
 		Maid n_Maid = new Maid();
-		Service p_Service = new Service();
+		Job p_Service = new Job();
 
 		try {
-			p_Service = createService(connection, maid);
+			p_Service = createJob(connection, maid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -113,4 +113,30 @@ public class MaidObject extends ServiceObject {
 		}
 		return n_Maid;
 	}
+	
+	public boolean deleteMaid(Connection connection, String id) throws Exception{
+		
+		deleteJob(connection, id);
+		
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("DELETE FROM `testcraighslist`.`maid` WHERE `post_id`= ? ;");
+			ps.setLong(1, Long.parseLong(id));
+
+			System.out.println(ps.executeUpdate());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+		
+		return true;
+	}
+	
+	public boolean updateMaid(Connection connection, String id) throws Exception{
+		return true;
+	}
+	
 }

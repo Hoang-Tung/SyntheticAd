@@ -13,7 +13,7 @@ import com.kenshin.SyntheticAd.dao.VehicleObject;
 import com.kenshin.SyntheticAd.dto.Category;
 import com.kenshin.SyntheticAd.dto.Vehicle;
 
-@Api(name = "vehivle", version = "v1")
+@Api(name = "vehicle", version = "v1")
 public class VehicleObjectManager {
 	@ApiMethod(name = "vehicles")
 	public ArrayList<Vehicle> getAll(@Named("offset") String offset)
@@ -63,25 +63,28 @@ public class VehicleObjectManager {
 		}
 		return datas;
 	}
-	
+
 	@ApiMethod(name = "vehicleByDistance")
-	public ArrayList<Vehicle> getVehicleByDistance(@Named("distance") @Nullable Double distance,
-			@Named("offset") @Nullable int offset,@Named("lat") @Nullable Double lat,
+	public ArrayList<Vehicle> getVehicleByDistance(
+			@Named("category_id") @Nullable String category_id,
+			@Named("distance") @Nullable Double distance,
+			@Named("offset") @Nullable int offset,
+			@Named("lat") @Nullable Double lat,
 			@Named("lon") @Nullable Double lon) throws Exception {
 		ArrayList<Vehicle> datas = null;
 		try {
 			Database database = new Database();
 			Connection connection = database.getConnect();
 			VehicleObject object = new VehicleObject();
-			datas = object
-					.getByDistance(connection, lat, lon, distance, offset);
+			datas = object.getByDistance(connection, category_id, lat, lon,
+					distance, offset);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return datas;
 	}
 
-	@ApiMethod(name = "createVehicle")
+	@ApiMethod(name = "vehiclecreate")
 	public Vehicle insertVehicle(Vehicle vehicle) throws Exception {
 		Vehicle nVehicle = new Vehicle();
 		Database database = new Database();
@@ -96,7 +99,7 @@ public class VehicleObjectManager {
 		return nVehicle;
 	}
 
-	@ApiMethod(name = "updateVehicle")
+	@ApiMethod(name = "vehicleupdate")
 	public Vehicle updateViVehicle(Vehicle vehicle) throws Exception {
 		Vehicle nVehicle = new Vehicle();
 		Database database = new Database();
@@ -111,7 +114,7 @@ public class VehicleObjectManager {
 		return nVehicle;
 	}
 
-	@ApiMethod(name = "deleteVehicle")
+	@ApiMethod(name = "vehicledelete")
 	public void deleteVehicle(@Named("id") String id) throws Exception {
 		Database database = new Database();
 		try {

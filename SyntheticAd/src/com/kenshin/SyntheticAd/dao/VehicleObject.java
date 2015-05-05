@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.kenshin.SyntheticAd.Constant;
 import com.kenshin.SyntheticAd.dto.Post;
 import com.kenshin.SyntheticAd.dto.Vehicle;
 
@@ -72,7 +73,7 @@ public class VehicleObject {
 			String title, String category_id, String location_id, String type)
 			throws Exception {
 		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
-		
+
 		return datas;
 	}
 
@@ -386,11 +387,73 @@ public class VehicleObject {
 		return nVehicle;
 	}
 
-	public ArrayList<Vehicle> getByDistance(Connection connection, Double lat,
-			Double lon, Double distance, int offset) {
+	public ArrayList<Vehicle> getByDistance(Connection connection,
+			String category_id, Double lat, Double lon, Double distance,
+			int offset) throws Exception {
 		// TODO Auto-generated method stub
-		
-		return null;
+		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
+
+		try {
+
+			PreparedStatement ps = connection
+					.prepareStatement("SELECT * FROM testcraighslist.vehicle WHERE vehicle.lat > ? AND vehicle.lat < ? AND vehicle.lon > ? AND vehicle.lon < ?");
+			ps.setString(1, String.valueOf(lat - (distance * 360 / Constant.earth / Constant.pi / 2 )));
+			ps.setString(2, String.valueOf(lat + (distance * 360 / Constant.earth / Constant.pi / 2 )));
+			ps.setString(3, String.valueOf(lon - (distance * 360 / Constant.earth / Constant.pi / 2 )));
+			ps.setString(4, String.valueOf(lon + (distance * 360 / Constant.earth / Constant.pi / 2 )));
+			System.out.println(String.valueOf(lat + (distance * 360 / Constant.earth / Constant.pi / 2 )));
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Vehicle c = new Vehicle();
+				c.setId(rs.getString("id"));
+				c.setUser_id(rs.getString("user_id"));
+				c.setTitle(rs.getString("title"));
+				c.setCategory_id(rs.getString("category_id"));
+				c.setDescription(rs.getString("description"));
+				c.setType(rs.getString("type"));
+				c.setPrice(rs.getString("price"));
+				if (rs.getString("lon") != null) {
+					c.setLon(rs.getString("lon"));
+				}
+				if (rs.getString("lat") != null) {
+					c.setLat(rs.getString("lat"));
+				}
+				c.setLocation_id(rs.getString("location_id"));
+				if (rs.getString("image_url") != null) {
+					c.setImageUrl(rs.getString("image_url"));
+				}
+				if (rs.getString("condition") != null) {
+					c.setCondition(rs.getString("condition"));
+				}
+				if (rs.getString("extend_type") != null) {
+					c.setExtend_type(rs.getString("extend_type"));
+				}
+				if (rs.getString("pass") != null) {
+					c.setExtend_type(rs.getString("pass"));
+				}
+				c.setCare_num(rs.getString("care_num"));
+				if (rs.getString("size") != null)
+					c.setSize(rs.getString("size"));
+				if (rs.getString("created_at") != null)
+					c.setCreated_at(rs.getString("created_at"));
+				if (rs.getString("updated_at") != null)
+					c.setUpdated_at(rs.getString("updated_at"));
+				c.setAddress(rs.getString("address"));
+				if (rs.getString("phone_num") != null)
+					c.setPhone_num(rs.getString("phone_num"));
+
+				datas.add(c);
+			}
+			return datas;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+		return datas;
 	}
 
 	public double distance(double lat1, double lng1, double lat2, double lng2) {

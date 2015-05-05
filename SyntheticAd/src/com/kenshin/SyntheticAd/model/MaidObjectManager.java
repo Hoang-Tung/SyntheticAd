@@ -14,7 +14,7 @@ import com.kenshin.SyntheticAd.dto.Maid;
 @Api(name="maid", version="v1")
 public class MaidObjectManager {
 	
-	@ApiMethod(name="getMaid")
+	@ApiMethod(name="getmaidbylocationandcategory")
 	public ArrayList<Maid> getMaidLocationAndCategory(@Named("category_id") String category_id,
 			@Named("location_id") String location_id, @Named("type") String type,
 			@Named("offset") String offset) throws Exception{
@@ -32,7 +32,7 @@ public class MaidObjectManager {
 		return datas;
 	}
 	
-	@ApiMethod(name="createMaid")
+	@ApiMethod(name="maidcreate")
 	public Maid createMaid(Maid maid) throws Exception{
 		Maid n_maid = new Maid();
 		

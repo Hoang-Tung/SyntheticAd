@@ -24,22 +24,6 @@
     "maxAge" : 0
   },
   "methods" : {
-    "user.createUser" : {
-      "path" : "createUser",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.UserObjectManager.createUser",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "user.userObjectManager.getUser" : {
       "path" : "user/{email}",
       "httpMethod" : "GET",
@@ -56,6 +40,22 @@
           }
         },
         "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "user.createuser" : {
+      "path" : "createUser",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.UserObjectManager.createUser",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -271,14 +271,14 @@
           "displayName" : {
             "type" : "string"
           },
-          "symbol" : {
-            "type" : "string"
-          },
           "defaultFractionDigits" : {
             "type" : "integer"
           },
           "numericCode" : {
             "type" : "integer"
+          },
+          "symbol" : {
+            "type" : "string"
           }
         }
       },
@@ -289,15 +289,15 @@
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.UserObjectManager.createUser" : {
-        "request" : {
-          "$ref" : "User"
-        },
+      "com.kenshin.SyntheticAd.model.UserObjectManager.getUser" : {
         "response" : {
           "$ref" : "User"
         }
       },
-      "com.kenshin.SyntheticAd.model.UserObjectManager.getUser" : {
+      "com.kenshin.SyntheticAd.model.UserObjectManager.createUser" : {
+        "request" : {
+          "$ref" : "User"
+        },
         "response" : {
           "$ref" : "User"
         }

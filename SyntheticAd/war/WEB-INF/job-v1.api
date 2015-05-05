@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://even-envoy-89503.appspot.com/_ah/api",
-  "name" : "service",
+  "name" : "job",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -24,14 +24,14 @@
     "maxAge" : 0
   },
   "methods" : {
-    "service.servicecreate" : {
-      "path" : "createService",
-      "httpMethod" : "POST",
+    "job.jobupdate" : {
+      "path" : "job",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.updateJob",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -40,14 +40,30 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.getservice" : {
-      "path" : "servicecollection/{category_id}/{location_id}/{type}/{offset}",
+    "job.jobcreate" : {
+      "path" : "createJob",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.createJob",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "job.getjob" : {
+      "path" : "jobcollection/{category_id}/{location_id}/{type}/{offset}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.getJobLocationAndCategory",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -72,12 +88,33 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "job.jobdelete" : {
+      "path" : "job/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.deleteJob",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "Service" : {
-        "id" : "Service",
+      "Job" : {
+        "id" : "Job",
         "type" : "object",
         "properties" : {
           "id" : {
@@ -146,32 +183,42 @@
           }
         }
       },
-      "ServiceCollection" : {
-        "id" : "ServiceCollection",
+      "JobCollection" : {
+        "id" : "JobCollection",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Service"
+              "$ref" : "Job"
             }
           }
         }
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService" : {
+      "com.kenshin.SyntheticAd.model.JobObjectManager.updateJob" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Job"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Job"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory" : {
+      "com.kenshin.SyntheticAd.model.JobObjectManager.createJob" : {
+        "request" : {
+          "$ref" : "Job"
+        },
         "response" : {
-          "$ref" : "ServiceCollection"
+          "$ref" : "Job"
         }
+      },
+      "com.kenshin.SyntheticAd.model.JobObjectManager.getJobLocationAndCategory" : {
+        "response" : {
+          "$ref" : "JobCollection"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.JobObjectManager.deleteJob" : {
       }
     }
   }

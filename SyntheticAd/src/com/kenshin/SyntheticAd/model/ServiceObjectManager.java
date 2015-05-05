@@ -15,7 +15,7 @@ import com.kenshin.SyntheticAd.dto.Service;
 @Api(name="service", version="v1")
 public class ServiceObjectManager {
 	
-	@ApiMethod(name="getService")
+	@ApiMethod(name="getservice")
 	public ArrayList<Service> getServiceLocationAndCategory(@Named("category_id") String category_id,
 			@Named("location_id") String location_id, @Named("type") String type,
 			@Named("offset") String offset) throws Exception{
@@ -32,7 +32,7 @@ public class ServiceObjectManager {
 		return datas;
 	}
 	
-	@ApiMethod(name="createService")
+	@ApiMethod(name="servicecreate")
 	public Service createService(Service service) throws Exception{
 		Service n_Service = new Service();
 		
