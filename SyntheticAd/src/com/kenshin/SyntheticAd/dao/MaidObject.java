@@ -78,12 +78,23 @@ public class MaidObject extends JobObject {
 		return maid_datas;
 	}
 
-	public Maid createMaid(Connection connection, Maid maid) {
+	public Maid createMaid(Connection connection, Maid maid, String password) {
 		Maid n_Maid = new Maid();
-		Job p_Service = new Job();
+		Job p_Job = new Job();
 
 		try {
-			p_Service = createJob(connection, maid);
+
+			PreparedStatement preps = connection
+					.prepareStatement("SELECT * FROM testcraighslist.user WHERE user.id = ? AND user.password = ?;");
+			preps.setLong(1, maid.getUser_id());
+			preps.setString(2, password);
+
+			ResultSet rs = preps.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+			p_Job = createJob(connection, maid, password);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,10 +107,11 @@ public class MaidObject extends JobObject {
 			PreparedStatement ps = con
 					.prepareStatement("INSERT INTO testcraighslist.maid (`category_id`, `post_id`, `area`, `time_start`, `time_end`) VALUES (?, ?, ?, ?, ?);");
 			ps.setLong(1, maid.getCategory_id());
-			ps.setLong(2, p_Service.getId());
+			ps.setLong(2, p_Job.getId());
 			ps.setLong(3, (long) maid.getArea());
 
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
 
 			ps.setString(4, simpleDateFormat.format(maid.getStart_time()));
 
@@ -113,11 +125,12 @@ public class MaidObject extends JobObject {
 		}
 		return n_Maid;
 	}
-	
-	public boolean deleteMaid(Connection connection, String id) throws Exception{
-		
+
+	public boolean deleteMaid(Connection connection, String id)
+			throws Exception {
+
 		deleteJob(connection, id);
-		
+
 		try {
 			PreparedStatement ps = connection
 					.prepareStatement("DELETE FROM `testcraighslist`.`maid` WHERE `post_id`= ? ;");
@@ -131,12 +144,74 @@ public class MaidObject extends JobObject {
 			if (connection != null)
 				connection.close();
 		}
-		
+
 		return true;
 	}
-	
-	public boolean updateMaid(Connection connection, String id) throws Exception{
-		return true;
+
+	public Maid updateMaid(Connection connection, Maid maid)
+			throws Exception {
+
+		Job n_Job = new Job();
+		n_Job = maid.createJob();
+
+		updateJob(connection, n_Job);
+
+		try {
+			
+			String queryToJob = "UPDATE `testcraighslist`.`maid` SET ";
+			StringBuilder build = new StringBuilder(queryToJob);
+
+			if (maid.getTitle() != null) {
+				build.append("`title`= '" + maid.getTitle() + "',");
+			}
+
+			if (maid.getArea() != 0) {
+				build.append(" `area` = '" + maid.getArea() + "',");
+			}
+
+			build.deleteCharAt(build.length() - 1);
+
+			build.append("WHERE `post_id` = '" + maid.getPost_id() + "';");
+
+			System.out.println(build.toString());
+
+			PreparedStatement ps = connection
+					.prepareStatement(build.toString());
+			System.out.println(ps.executeUpdate());
+
+			String queryToTitle = "UPDATE `testcraighslist`.`title` SET ";
+			StringBuilder build1 = new StringBuilder(queryToTitle);
+
+			if (maid.getTitle() != null) {
+				build1.append("`title`= '" + maid.getTitle() + "',");
+			}
+			if (maid.getType() != 0) {
+				build1.append(" `type` = '" + maid.getType() + "',");
+			}
+
+			if (maid.getLocation_id() != 0) {
+				build1.append(" `location_id` = '" + maid.getLocation_id()
+						+ "',");
+			}
+
+			build1.deleteCharAt(build.length() - 1);
+
+			build1.append("WHERE `post_id` = '" + maid.getPost_id()
+					+ "AND `category_id`= '" + maid.getCategory_id() + "';");
+
+			PreparedStatement ps1 = connection.prepareStatement(build1
+					.toString());
+
+			System.out.println(ps1.executeUpdate());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+
+		return maid;
 	}
-	
+
 }

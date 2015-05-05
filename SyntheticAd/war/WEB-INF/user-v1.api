@@ -123,12 +123,12 @@
           "minimalDaysInFirstWeek" : {
             "type" : "integer"
           },
+          "timeZone" : {
+            "$ref" : "TimeZone"
+          },
           "timeInMillis" : {
             "type" : "string",
             "format" : "int64"
-          },
-          "timeZone" : {
-            "$ref" : "TimeZone"
           },
           "calendarType" : {
             "type" : "string"
@@ -271,14 +271,14 @@
           "displayName" : {
             "type" : "string"
           },
+          "symbol" : {
+            "type" : "string"
+          },
           "defaultFractionDigits" : {
             "type" : "integer"
           },
           "numericCode" : {
             "type" : "integer"
-          },
-          "symbol" : {
-            "type" : "string"
           }
         }
       },

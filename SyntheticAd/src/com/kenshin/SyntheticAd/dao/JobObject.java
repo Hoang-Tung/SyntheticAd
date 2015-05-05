@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.kenshin.SyntheticAd.dto.Job;
-import com.kenshin.SyntheticAd.dto.Job;
 
 public class JobObject {
 	public ArrayList<Job> getAll(Connection connection) throws Exception {
@@ -191,14 +190,26 @@ public class JobObject {
 		}
 	}
 
-	public Job createJob(Connection connection, Job job) throws Exception {
+	public Job createJob(Connection connection, Job job, String password)
+			throws Exception {
 		Job n_Job = new Job();
 
 		try {
+			PreparedStatement preps = connection
+					.prepareStatement("SELECT * FROM testcraighslist.user WHERE user.id = ? AND user.password = ?;");
+			preps.setLong(1, job.getUser_id());
+			preps.setString(2, password);
+
+			ResultSet rs = preps.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+
 			PreparedStatement ps = connection
 					.prepareStatement("INSERT INTO `testcraighslist`.`job` (`category_id`,"
-							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`, `lat`, `lon`) "
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setLong(1, job.getCategory_id());
 			ps.setString(2, job.getTitle());
 			ps.setString(3, job.getDescription());
@@ -215,6 +226,15 @@ public class JobObject {
 			} else {
 				ps.setString(12, "");
 			}
+			
+			if(job.getLat() != null)
+				ps.setString(13, String.valueOf(job.getLat()));
+			else
+				ps.setLong(13, 0);
+			if(job.getLon() != null)
+				ps.setString(14, String.valueOf(job.getLon()));
+			else
+				ps.setLong(14, 0);
 
 			System.out.println(ps.executeUpdate());
 
@@ -224,12 +244,15 @@ public class JobObject {
 				if (result.next()) {
 
 					PreparedStatement ps1 = connection
-							.prepareStatement("INSERT INTO `testcraighslist`.`title` (`category_id`, `post_id`, `title`)"
-									+ " VALUES (?, ?, ?);");
+							.prepareStatement("INSERT INTO `testcraighslist`.`title` (`category_id`, `post_id`, `title`, `user_id`, `location_id`, `type`)"
+									+ " VALUES (?, ?, ?, ?, ?, ?);");
 					ps1.setLong(1, job.getCategory_id());
 					ps1.setLong(2, result.getLong(1));
 					n_Job.setId(result.getString(1));
 					ps1.setString(3, job.getTitle());
+					ps1.setLong(4, job.getUser_id());
+					ps1.setLong(5, job.getLocation_id());
+					ps1.setLong(6, job.getType());
 					ps1.executeUpdate();
 
 				}
@@ -256,7 +279,7 @@ public class JobObject {
 		Job nJob = new Job();
 
 		try {
-			String queryToJob = "UPDATE `testcraighslist`.`Job` SET ";
+			String queryToJob = "UPDATE `testcraighslist`.`job` SET ";
 			StringBuilder build = new StringBuilder(queryToJob);
 
 			if (job.getTitle() != null) {
@@ -283,13 +306,13 @@ public class JobObject {
 				build.append(" `location_id` = '" + job.getLocation_id() + "',");
 			}
 
-			if (job.getLat() != 0) {
-				build.append(" `lat` = '" + job.getLat() + "',");
-			}
-
-			if (job.getLon() != 0) {
-				build.append(" `lon` = '" + job.getLon() + "',");
-			}
+			 if (job.getLat() != null) {
+			 build.append(" `lat` = '" + job.getLat() + "',");
+			 }
+			
+			 if (job.getLon() != null) {
+			 build.append(" `lon` = '" + job.getLon() + "',");
+			 }
 
 			if (job.getCare_num() != 0) {
 				build.append(" `care_num` = '" + job.getCare_num() + "',");
@@ -313,7 +336,7 @@ public class JobObject {
 
 			build.deleteCharAt(build.length() - 1);
 
-			build.append("WHERE `id` = '" + job.getId() + "';");
+			build.append(" WHERE `id` = '" + job.getId() + "';");
 
 			System.out.println(build.toString());
 
@@ -321,7 +344,7 @@ public class JobObject {
 					.prepareStatement(build.toString());
 			System.out.println(ps.executeUpdate());
 
-			String queryToTitle = "UPDATE `testcraighslist`.`Job` SET ";
+			String queryToTitle = "UPDATE `testcraighslist`.`title` SET ";
 			StringBuilder build1 = new StringBuilder(queryToTitle);
 
 			if (job.getTitle() != null) {
@@ -335,10 +358,17 @@ public class JobObject {
 				build1.append(" `location_id` = '" + job.getLocation_id()
 						+ "',");
 			}
-			
-			build.deleteCharAt(build.length() - 1);
 
-			build.append("WHERE `post_id` = '" + job.getId() + "AND `category_id`= '" + job.getCategory_id() + "';");
+			build1.deleteCharAt(build1.length() - 1);
+
+			build1.append(" WHERE `post_id` = '" + job.getId() + "'"
+					+ " AND `category_id`= '" + job.getCategory_id() + "';");
+
+			System.out.println(build1.toString());
+
+			PreparedStatement ps1 = connection.prepareStatement(build1
+					.toString());
+			System.out.println(ps1.execute());
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -350,31 +380,35 @@ public class JobObject {
 
 		return nJob;
 	}
-	
-	public boolean deleteJob(Connection connection, String post_id) throws Exception {
-		
+
+	public boolean deleteJob(Connection connection, String post_id)
+			throws Exception {
+
 		try {
-			PreparedStatement ps2 = connection.prepareStatement("SELECT job.category_id FROM `testcraighslist`.`job` WHERE `id`=?;");
+			PreparedStatement ps2 = connection
+					.prepareStatement("SELECT job.category_id FROM `testcraighslist`.`job` WHERE `id`=?;");
 			ps2.setString(1, post_id);
-			
+
 			ResultSet rs = ps2.executeQuery();
-			
+
 			String category_id = null;
-			if(rs.next())
+			if (rs.next())
 				category_id = rs.getString(1);
 			System.out.println("delete category_id: " + category_id);
-				 
-			PreparedStatement ps = connection.prepareStatement("DELETE FROM `testcraighslist`.`job` WHERE `id`=?;");
+
+			PreparedStatement ps = connection
+					.prepareStatement("DELETE FROM `testcraighslist`.`job` WHERE `id`=?;");
 			ps.setString(1, post_id);
-			
+
 			System.out.println(ps.executeUpdate());
-			
-			PreparedStatement ps1 = connection.prepareStatement("DELETE FROM `testcraighslist`.`title` WHERE `post_id`= ? AND `category_id` = ?;");
+
+			PreparedStatement ps1 = connection
+					.prepareStatement("DELETE FROM `testcraighslist`.`title` WHERE `post_id`= ? AND `category_id` = ?;");
 			ps1.setString(1, post_id);
 			ps1.setString(2, category_id);
-			
+
 			System.out.println(ps1.executeUpdate());
-			
+
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -385,5 +419,5 @@ public class JobObject {
 		}
 		return true;
 	}
-	
+
 }

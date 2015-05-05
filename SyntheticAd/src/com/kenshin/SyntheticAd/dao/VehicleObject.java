@@ -259,11 +259,11 @@ public class VehicleObject {
 						+ "',");
 			}
 
-			if (vehicle.getLat() != 0) {
+			if (vehicle.getLat() != null) {
 				build.append(" `lat` = '" + vehicle.getLat() + "',");
 			}
 
-			if (vehicle.getLon() != 0) {
+			if (vehicle.getLon() != null) {
 				build.append(" `lon` = '" + vehicle.getLon() + "',");
 			}
 
@@ -297,6 +297,31 @@ public class VehicleObject {
 					.prepareStatement(build.toString());
 			System.out.println(ps.executeUpdate());
 
+			String queryToTitle = "UPDATE `testcraighslist`.`title` SET ";
+			StringBuilder build1 = new StringBuilder(queryToTitle);
+
+			if (vehicle.getTitle() != null) {
+				build1.append("`title`= '" + vehicle.getTitle() + "',");
+			}
+			if (vehicle.getType() != 0) {
+				build1.append(" `type` = '" + vehicle.getType() + "',");
+			}
+
+			if (vehicle.getLocation_id() != 0) {
+				build1.append(" `location_id` = '" + vehicle.getLocation_id()
+						+ "',");
+			}
+
+			build1.deleteCharAt(build.length() - 1);
+
+			build1.append("WHERE `post_id` = '" + vehicle.getId()
+					+ "AND `category_id`= '" + vehicle.getCategory_id() + "';");
+
+			PreparedStatement ps1 = connection.prepareStatement(build1
+					.toString());
+
+			System.out.println(ps1.executeUpdate());
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -308,15 +333,27 @@ public class VehicleObject {
 		return nVehicle;
 	}
 
-	public Vehicle insertVehicle(Connection connection, Vehicle vehicle)
-			throws Exception {
+	public Vehicle insertVehicle(Connection connection, Vehicle vehicle,
+			String password) throws Exception {
 		// TODO Auto-generated method stub
 		Vehicle nVehicle = new Vehicle();
+
 		try {
+			PreparedStatement preps = connection
+					.prepareStatement("SELECT * FROM testcraighslist.user WHERE user.id = ? AND user.password = ?;");
+			preps.setLong(1, vehicle.getUser_id());
+			preps.setString(2, password);
+
+			ResultSet rs = preps.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}			
+			
 			PreparedStatement ps = connection
 					.prepareStatement("INSERT INTO `testcraighslist`.`vehicle` (`category_id`,"
-							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`, `lat`, `lon`) "
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setLong(1, vehicle.getCategory_id());
 			ps.setString(2, vehicle.getTitle());
 			ps.setString(3, vehicle.getDescription());
@@ -328,11 +365,21 @@ public class VehicleObject {
 			ps.setString(9, vehicle.getPass());
 			ps.setString(10, vehicle.getImageUrl());
 			ps.setString(11, vehicle.getAddress());
+			
 			if (vehicle.getPhone_num() != null) {
 				ps.setString(12, vehicle.getPhone_num());
 			} else {
 				ps.setString(12, "");
 			}
+			
+			if(vehicle.getLat() != null)
+				ps.setString(13, String.valueOf(vehicle.getLat()));
+			else
+				ps.setLong(13, 0);
+			if(vehicle.getLon() != null)
+				ps.setString(14, String.valueOf(vehicle.getLon()));
+			else
+				ps.setLong(14, 0);
 
 			System.out.println(ps.executeUpdate());
 
@@ -397,11 +444,16 @@ public class VehicleObject {
 
 			PreparedStatement ps = connection
 					.prepareStatement("SELECT * FROM testcraighslist.vehicle WHERE vehicle.lat > ? AND vehicle.lat < ? AND vehicle.lon > ? AND vehicle.lon < ?");
-			ps.setString(1, String.valueOf(lat - (distance * 360 / Constant.earth / Constant.pi / 2 )));
-			ps.setString(2, String.valueOf(lat + (distance * 360 / Constant.earth / Constant.pi / 2 )));
-			ps.setString(3, String.valueOf(lon - (distance * 360 / Constant.earth / Constant.pi / 2 )));
-			ps.setString(4, String.valueOf(lon + (distance * 360 / Constant.earth / Constant.pi / 2 )));
-			System.out.println(String.valueOf(lat + (distance * 360 / Constant.earth / Constant.pi / 2 )));
+			ps.setString(1, String.valueOf(lat
+					- (distance * 360 / Constant.earth / Constant.pi / 2)));
+			ps.setString(2, String.valueOf(lat
+					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
+			ps.setString(3, String.valueOf(lon
+					- (distance * 360 / Constant.earth / Constant.pi / 2)));
+			ps.setString(4, String.valueOf(lon
+					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
+			System.out.println(String.valueOf(lat
+					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -454,18 +506,5 @@ public class VehicleObject {
 				connection.close();
 		}
 		return datas;
-	}
-
-	public double distance(double lat1, double lng1, double lat2, double lng2) {
-		double earthRadius = 6371000; // meters
-		double dLat = Math.toRadians(lat2 - lat1);
-		double dLng = Math.toRadians(lng2 - lng1);
-		double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
-				+ Math.cos(Math.toRadians(lat1))
-				* Math.cos(Math.toRadians(lat2)) * Math.sin(dLng / 2)
-				* Math.sin(dLng / 2);
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-		double dist = (earthRadius * c);
-		return dist;
 	}
 }

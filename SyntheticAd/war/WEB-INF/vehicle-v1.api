@@ -136,22 +136,6 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "vehicle.vehiclecreate" : {
-      "path" : "vehicle",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
     "vehicle.vehicleupdate" : {
       "path" : "vehicle",
       "httpMethod" : "PUT",
@@ -187,6 +171,28 @@
       },
       "response" : {
         "body" : "empty"
+      }
+    },
+    "vehicle.vehiclecreate" : {
+      "path" : "vehicle",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle",
+      "request" : {
+        "parameters" : {
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -296,14 +302,6 @@
           "$ref" : "Vehicle"
         }
       },
-      "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle" : {
-        "request" : {
-          "$ref" : "Vehicle"
-        },
-        "response" : {
-          "$ref" : "Vehicle"
-        }
-      },
       "com.kenshin.SyntheticAd.model.VehicleObjectManager.updateViVehicle" : {
         "request" : {
           "$ref" : "Vehicle"
@@ -313,6 +311,14 @@
         }
       },
       "com.kenshin.SyntheticAd.model.VehicleObjectManager.deleteVehicle" : {
+      },
+      "com.kenshin.SyntheticAd.model.VehicleObjectManager.insertVehicle" : {
+        "request" : {
+          "$ref" : "Vehicle"
+        },
+        "response" : {
+          "$ref" : "Vehicle"
+        }
       }
     }
   }

@@ -25,13 +25,35 @@
   },
   "methods" : {
     "service.servicecreate" : {
-      "path" : "createService",
+      "path" : "service",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService",
+      "request" : {
+        "parameters" : {
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "service.updateservice" : {
+      "path" : "service",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -71,6 +93,27 @@
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "service.servicedelete" : {
+      "path" : "service/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
       }
     }
   },
@@ -168,10 +211,20 @@
           "$ref" : "Service"
         }
       },
+      "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService" : {
+        "request" : {
+          "$ref" : "Service"
+        },
+        "response" : {
+          "$ref" : "Service"
+        }
+      },
       "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory" : {
         "response" : {
           "$ref" : "ServiceCollection"
         }
+      },
+      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService" : {
       }
     }
   }

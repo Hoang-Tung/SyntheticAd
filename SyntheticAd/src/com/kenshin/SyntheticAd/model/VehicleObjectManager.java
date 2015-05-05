@@ -85,13 +85,14 @@ public class VehicleObjectManager {
 	}
 
 	@ApiMethod(name = "vehiclecreate")
-	public Vehicle insertVehicle(Vehicle vehicle) throws Exception {
+	public Vehicle insertVehicle(Vehicle vehicle,
+			@Named("password") @Nullable String password) throws Exception {
 		Vehicle nVehicle = new Vehicle();
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
 			VehicleObject object = new VehicleObject();
-			nVehicle = object.insertVehicle(con, vehicle);
+			nVehicle = object.insertVehicle(con, vehicle, password);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

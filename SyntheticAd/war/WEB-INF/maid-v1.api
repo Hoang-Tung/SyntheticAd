@@ -24,6 +24,65 @@
     "maxAge" : 0
   },
   "methods" : {
+    "maid.maidcreate" : {
+      "path" : "maid",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.insertMaid",
+      "request" : {
+        "parameters" : {
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "maid.maidupdate" : {
+      "path" : "maid",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.updateMaid",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "maid.maiddelete" : {
+      "path" : "maid/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.deleteMaid",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
     "maid.getmaidbylocationandcategory" : {
       "path" : "maidcollection/{category_id}/{location_id}/{type}/{offset}",
       "httpMethod" : "GET",
@@ -52,22 +111,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "maid.maidcreate" : {
-      "path" : "createMaid",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.createMaid",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -178,17 +221,27 @@
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.MaidObjectManager.getMaidLocationAndCategory" : {
-        "response" : {
-          "$ref" : "MaidCollection"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.MaidObjectManager.createMaid" : {
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.insertMaid" : {
         "request" : {
           "$ref" : "Maid"
         },
         "response" : {
           "$ref" : "Maid"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.updateMaid" : {
+        "request" : {
+          "$ref" : "Maid"
+        },
+        "response" : {
+          "$ref" : "Maid"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.deleteMaid" : {
+      },
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.getMaidLocationAndCategory" : {
+        "response" : {
+          "$ref" : "MaidCollection"
         }
       }
     }

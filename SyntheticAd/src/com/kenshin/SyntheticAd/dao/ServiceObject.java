@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import com.kenshin.SyntheticAd.dto.Post;
 import com.kenshin.SyntheticAd.dto.Service;
-
+import com.kenshin.SyntheticAd.dto.Service;
 
 public class ServiceObject {
 
@@ -193,14 +193,26 @@ public class ServiceObject {
 		}
 	}
 
-	public Service createService(Connection connection, Service service) throws Exception{
+	public Service createService(Connection connection, Service service,
+			String password) throws Exception {
 		Service n_Service = new Service();
-		
+
 		try {
+			PreparedStatement preps = connection
+					.prepareStatement("SELECT * FROM testcraighslist.user WHERE user.id = ? AND user.password = ?;");
+			preps.setLong(1, service.getUser_id());
+			preps.setString(2, password);
+
+			ResultSet rs = preps.executeQuery();
+
+			if (!rs.next()) {
+				return null;
+			}
+
 			PreparedStatement ps = connection
 					.prepareStatement("INSERT INTO `testcraighslist`.`service` (`category_id`,"
-							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`) "
-							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`, `lat`, `lon`) "
+							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			ps.setLong(1, service.getCategory_id());
 			ps.setString(2, service.getTitle());
 			ps.setString(3, service.getDescription());
@@ -212,17 +224,27 @@ public class ServiceObject {
 			ps.setString(9, service.getPass());
 			ps.setString(10, service.getImageUrl());
 			ps.setString(11, service.getAddress());
+
 			if (service.getPhone_num() != null) {
 				ps.setString(12, service.getPhone_num());
 			} else {
 				ps.setString(12, "");
 			}
 
+			if (service.getLat() != null)
+				ps.setString(13, String.valueOf(service.getLat()));
+			else
+				ps.setLong(13, 0);
+			if (service.getLon() != null)
+				ps.setString(14, String.valueOf(service.getLon()));
+			else
+				ps.setLong(14, 0);
+
 			System.out.println(ps.executeUpdate());
 
 			try {
 				ResultSet result = ps.getGeneratedKeys();
-				
+
 				if (result.next()) {
 
 					PreparedStatement ps1 = connection
@@ -233,15 +255,14 @@ public class ServiceObject {
 					n_Service.setId(result.getString(1));
 					ps1.setString(3, service.getTitle());
 					ps1.executeUpdate();
-					
-					
+
 				}
 
 			} catch (Exception e) {
 				// TODO: handle exception
 				throw e;
 			}
-			
+
 			return n_Service;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -250,8 +271,136 @@ public class ServiceObject {
 			if (connection != null)
 				connection.close();
 		}
-		
+
 		return n_Service;
 	}
+
+	public Service updateService(Connection connection, Service service)
+			throws Exception {
+		Service u_Service = new Service();
+
+		try {
+			String queryToJob = "UPDATE `testcraighslist`.`service` SET ";
+			StringBuilder build = new StringBuilder(queryToJob);
+
+			if (service.getTitle() != null) {
+				build.append("`title`= '" + service.getTitle() + "',");
+			}
+
+			if (service.getDescription() != null) {
+				build.append("`description` = '" + service.getDescription()
+						+ "',");
+			}
+
+			if (service.getPrice() != 0) {
+				build.append(" `price` = '" + service.getPrice() + "',");
+			}
+
+			if (service.getCondition() != 0) {
+				build.append(" `condition` = '" + service.getCondition() + "',");
+			}
+
+			if (service.getType() != 0) {
+				build.append(" `type` = '" + service.getType() + "',");
+			}
+
+			if (service.getLocation_id() != 0) {
+				build.append(" `location_id` = '" + service.getLocation_id()
+						+ "',");
+			}
+
+			if (service.getLat() != null) {
+				build.append(" `lat` = '" + service.getLat() + "',");
+			}
+
+			if (service.getLon() != null) {
+				build.append(" `lon` = '" + service.getLon() + "',");
+			}
+
+			if (service.getCare_num() != 0) {
+				build.append(" `care_num` = '" + service.getCare_num() + "',");
+			}
+
+			if (service.getSize() != 0) {
+				build.append(" `size` = '" + service.getSize() + "',");
+			}
+
+			if (service.getPass() != null) {
+				build.append(" `pass` = '" + service.getPass() + "',");
+			}
+
+			if (service.getAddress() != null) {
+				build.append(" `address` = '" + service.getAddress() + "',");
+			}
+
+			if (service.getPhone_num() != null) {
+				build.append(" `phone_num` = '" + service.getPhone_num() + "',");
+			}
+
+			build.deleteCharAt(build.length() - 1);
+
+			build.append(" WHERE `id` = '" + service.getId() + "';");
+
+			System.out.println(build.toString());
+
+			PreparedStatement ps = connection
+					.prepareStatement(build.toString());
+			System.out.println(ps.executeUpdate());
+
+			String queryToTitle = "UPDATE `testcraighslist`.`title` SET ";
+			StringBuilder build1 = new StringBuilder(queryToTitle);
+
+			if (service.getTitle() != null) {
+				build1.append("`title`= '" + service.getTitle() + "',");
+			}
+			if (service.getType() != 0) {
+				build1.append(" `type` = '" + service.getType() + "',");
+			}
+
+			if (service.getLocation_id() != 0) {
+				build1.append(" `location_id` = '" + service.getLocation_id()
+						+ "',");
+			}
+
+			build1.deleteCharAt(build1.length() - 1);
+
+			build1.append(" WHERE `post_id` = '" + service.getId() + "'"
+					+ " AND `category_id`= '" + service.getCategory_id() + "';");
+
+			System.out.println(build1.toString());
+
+			PreparedStatement ps1 = connection.prepareStatement(build1
+					.toString());
+			System.out.println(ps1.execute());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+
+		return u_Service;
+	}
 	
+	public boolean deleteService(Connection connection,String id) throws Exception{
+
+		try {
+			PreparedStatement ps = connection
+					.prepareStatement("DELETE FROM `testcraighslist`.`service` WHERE `id`=?;");
+			ps.setLong(1, Long.parseLong(id));
+
+			System.out.println(ps.executeUpdate());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+		
+		return true;
+	}
+
 }
