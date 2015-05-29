@@ -24,12 +24,7 @@ public class PostObject {
 				c.setUser_id(rs.getString("user_id"));
 				System.out.println(rs.getString("user_id"));
 
-				c.setSubcategory_id(rs.getString("subcategory_id"));
-				System.out.println(rs.getString("subcategory_id"));
-
-				c.setInfo(rs.getString("info"));
-				System.out.println(rs.getString("info"));
-
+				
 				c.setType(rs.getString("type"));
 				System.out.println(rs.getString("type"));
 
@@ -48,9 +43,7 @@ public class PostObject {
 				c.setLocation_id(rs.getString("location_id"));
 				System.out.println(rs.getString("location_id"));
 
-				c.setImage_url(rs.getString("image"));
-				System.out.println(rs.getString("image"));
-
+				
 				c.setCreated_at(rs.getString("created_at"));
 				System.out.println(rs.getString("created_at"));
 
@@ -90,12 +83,6 @@ public class PostObject {
 				c.setUser_id(rs.getString("user_id"));
 				System.out.println(rs.getString("user_id"));
 
-				c.setSubcategory_id(rs.getString("subcategory_id"));
-				System.out.println(rs.getString("subcategory_id"));
-
-				c.setInfo(rs.getString("info"));
-				System.out.println(rs.getString("info"));
-
 				c.setType(rs.getString("type"));
 				System.out.println(rs.getString("type"));
 
@@ -113,9 +100,6 @@ public class PostObject {
 				}
 				c.setLocation_id(rs.getString("location_id"));
 				System.out.println(rs.getString("location_id"));
-
-				c.setImage_url(rs.getString("image"));
-				System.out.println(rs.getString("image"));
 
 				c.setCreated_at(rs.getString("created_at"));
 				System.out.println(rs.getString("created_at"));

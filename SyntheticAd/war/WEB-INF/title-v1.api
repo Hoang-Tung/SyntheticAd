@@ -24,25 +24,21 @@
     "maxAge" : 0
   },
   "methods" : {
-    "title.titleByKeyword" : {
-      "path" : "titlecollection",
+    "title.titleByUser" : {
+      "path" : "titlecollection/{user_id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.TitleObjectManager.getTitleByKeyword",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TitleObjectManager.getTitleByUser",
       "request" : {
         "parameters" : {
-          "keyword" : {
+          "user_id" : {
             "type" : "string",
-            "required" : false
+            "required" : true
           },
-          "location_id" : {
-            "type" : "string",
-            "required" : false
-          },
-          "type" : {
+          "password" : {
             "type" : "string",
             "required" : false
           }
@@ -66,11 +62,18 @@
           "category_id" : {
             "type" : "integer"
           },
-          "post_id" : {
-            "type" : "integer"
-          },
           "title" : {
             "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "condition" : {
+            "type" : "integer"
           },
           "user_id" : {
             "type" : "integer"
@@ -78,7 +81,46 @@
           "location_id" : {
             "type" : "integer"
           },
+          "lat" : {
+            "type" : "number"
+          },
+          "lon" : {
+            "type" : "number"
+          },
+          "extend_type" : {
+            "type" : "integer"
+          },
+          "care_num" : {
+            "type" : "integer"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "size" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "pass" : {
+            "type" : "string"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
           "type" : {
+            "type" : "integer"
+          },
+          "address" : {
+            "type" : "string"
+          },
+          "phone_num" : {
+            "type" : "string"
+          },
+          "post_id" : {
             "type" : "integer"
           }
         }
@@ -97,7 +139,7 @@
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.TitleObjectManager.getTitleByKeyword" : {
+      "com.kenshin.SyntheticAd.model.TitleObjectManager.getTitleByUser" : {
         "response" : {
           "$ref" : "TitleCollection"
         }

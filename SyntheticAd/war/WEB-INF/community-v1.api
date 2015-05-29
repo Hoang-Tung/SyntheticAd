@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://even-envoy-89503.appspot.com/_ah/api",
-  "name" : "service",
+  "name" : "community",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -24,19 +24,31 @@
     "maxAge" : 0
   },
   "methods" : {
-    "service.getservicebyid" : {
-      "path" : "service/{id}",
-      "httpMethod" : "GET",
+    "community.decreaseCareNum" : {
+      "path" : "communityDeCreaseCareNum",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.deCreaseCareNum",
       "request" : {
         "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
           "id" : {
             "type" : "string",
             "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -45,14 +57,47 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.servicecreate" : {
-      "path" : "service",
+    "community.increaseCareNum" : {
+      "path" : "communityInCreaseCareNum",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.inCreaseCareNum",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "community.communitycreate" : {
+      "path" : "community",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.insertCommunity",
       "request" : {
         "parameters" : {
           "password" : {
@@ -67,30 +112,35 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.updateservice" : {
-      "path" : "service",
-      "httpMethod" : "PUT",
+    "community.community" : {
+      "path" : "community/{id}",
+      "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.getCommunity",
       "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.servicedelete" : {
-      "path" : "service/{id}",
+    "community.communitydelete" : {
+      "path" : "community/{id}",
       "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.deleteCommunity",
       "request" : {
         "parameters" : {
           "id" : {
@@ -104,80 +154,14 @@
         "body" : "empty"
       }
     },
-    "service.decreaseCareNum" : {
-      "path" : "serviceDeCreaseCareNum",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum",
-      "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "user_id" : {
-            "type" : "string",
-            "required" : false
-          },
-          "password" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.increaseCareNum" : {
-      "path" : "serviceInCreaseCareNum",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum",
-      "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "user_id" : {
-            "type" : "string",
-            "required" : false
-          },
-          "password" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.getservice" : {
-      "path" : "servicecollection/{category_id}/{location_id}/{type}",
+    "community.communityByCategoryAndLocation" : {
+      "path" : "communitycollection/{category_id}/{location_id}/{type}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.getVihicleByCategoryAndLocation",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -203,14 +187,67 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.vehicleByKeyword" : {
-      "path" : "vehiclecollection/{category_id}",
+    "community.communityupdate" : {
+      "path" : "community",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.updateViCommunity",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "community.communityByDistance" : {
+      "path" : "communitycollection",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.getCommunityByDistance",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "distance" : {
+            "type" : "double",
+            "required" : false
+          },
+          "offset" : {
+            "type" : "int32",
+            "required" : false
+          },
+          "lat" : {
+            "type" : "double",
+            "required" : false
+          },
+          "lon" : {
+            "type" : "double",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "community.communityByKeyword" : {
+      "path" : "communitycollection/{category_id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.CommunityObjectManager.getCommunityByKeyword",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -239,90 +276,8 @@
   },
   "descriptor" : {
     "schemas" : {
-      "Service" : {
-        "id" : "Service",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer"
-          },
-          "category_id" : {
-            "type" : "integer"
-          },
-          "title" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "price" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "condition" : {
-            "type" : "integer"
-          },
-          "user_id" : {
-            "type" : "integer"
-          },
-          "location_id" : {
-            "type" : "integer"
-          },
-          "lat" : {
-            "type" : "number"
-          },
-          "lon" : {
-            "type" : "number"
-          },
-          "extend_type" : {
-            "type" : "integer"
-          },
-          "care_num" : {
-            "type" : "integer"
-          },
-          "pass" : {
-            "type" : "string"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updated_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "size" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "imageUrl" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "integer"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "phone_num" : {
-            "type" : "string"
-          }
-        }
-      },
-      "ServiceCollection" : {
-        "id" : "ServiceCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Service"
-            }
-          }
-        }
-      },
-      "Vehicle" : {
-        "id" : "Vehicle",
+      "Community" : {
+        "id" : "Community",
         "type" : "object",
         "properties" : {
           "id" : {
@@ -391,61 +346,66 @@
           }
         }
       },
-      "VehicleCollection" : {
-        "id" : "VehicleCollection",
+      "CommunityCollection" : {
+        "id" : "CommunityCollection",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Vehicle"
+              "$ref" : "Community"
             }
           }
         }
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService" : {
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.deCreaseCareNum" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Community"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService" : {
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.inCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Community"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.insertCommunity" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Community"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Community"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService" : {
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.getCommunity" : {
+        "response" : {
+          "$ref" : "Community"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.deleteCommunity" : {
+      },
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.getVihicleByCategoryAndLocation" : {
+        "response" : {
+          "$ref" : "CommunityCollection"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.updateViCommunity" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Community"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Community"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService" : {
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.getCommunityByDistance" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "CommunityCollection"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.CommunityObjectManager.getCommunityByKeyword" : {
         "response" : {
-          "$ref" : "Service"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory" : {
-        "response" : {
-          "$ref" : "ServiceCollection"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword" : {
-        "response" : {
-          "$ref" : "VehicleCollection"
+          "$ref" : "CommunityCollection"
         }
       }
     }

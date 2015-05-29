@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://even-envoy-89503.appspot.com/_ah/api",
-  "name" : "service",
+  "name" : "applicance",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -24,14 +24,14 @@
     "maxAge" : 0
   },
   "methods" : {
-    "service.getservicebyid" : {
-      "path" : "service/{id}",
+    "applicance.applicance" : {
+      "path" : "applicance/{id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getApplicance",
       "request" : {
         "parameters" : {
           "id" : {
@@ -45,14 +45,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.servicecreate" : {
-      "path" : "service",
+    "applicance.applicancecreate" : {
+      "path" : "applicance",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.insertApplicance",
       "request" : {
         "parameters" : {
           "password" : {
@@ -67,30 +67,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.updateservice" : {
-      "path" : "service",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.servicedelete" : {
-      "path" : "service/{id}",
+    "applicance.applicancedelete" : {
+      "path" : "applicance/{id}",
       "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.deleteApplicance",
       "request" : {
         "parameters" : {
           "id" : {
@@ -104,14 +88,14 @@
         "body" : "empty"
       }
     },
-    "service.decreaseCareNum" : {
-      "path" : "serviceDeCreaseCareNum",
+    "applicance.decreaseCareNum" : {
+      "path" : "applicanceDeCreaseCareNum",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.deCreaseCareNum",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -137,14 +121,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.increaseCareNum" : {
-      "path" : "serviceInCreaseCareNum",
+    "applicance.increaseCareNum" : {
+      "path" : "applicanceInCreaseCareNum",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.inCreaseCareNum",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -170,14 +154,67 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.getservice" : {
-      "path" : "servicecollection/{category_id}/{location_id}/{type}",
+    "applicance.applicanceupdate" : {
+      "path" : "applicance",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.updateViApplicance",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "applicance.applicanceByDistance" : {
+      "path" : "applicancecollection",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getApplicanceByDistance",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "distance" : {
+            "type" : "double",
+            "required" : false
+          },
+          "offset" : {
+            "type" : "int32",
+            "required" : false
+          },
+          "lat" : {
+            "type" : "double",
+            "required" : false
+          },
+          "lon" : {
+            "type" : "double",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "applicance.applicanceByCategoryAndLocation" : {
+      "path" : "applicancecollection/{category_id}/{location_id}/{type}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getVihicleByCategoryAndLocation",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -203,14 +240,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.vehicleByKeyword" : {
-      "path" : "vehiclecollection/{category_id}",
+    "applicance.applicanceByKeyword" : {
+      "path" : "applicancecollection/{category_id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getApplicanceByKeyword",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -239,90 +276,8 @@
   },
   "descriptor" : {
     "schemas" : {
-      "Service" : {
-        "id" : "Service",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer"
-          },
-          "category_id" : {
-            "type" : "integer"
-          },
-          "title" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "price" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "condition" : {
-            "type" : "integer"
-          },
-          "user_id" : {
-            "type" : "integer"
-          },
-          "location_id" : {
-            "type" : "integer"
-          },
-          "lat" : {
-            "type" : "number"
-          },
-          "lon" : {
-            "type" : "number"
-          },
-          "extend_type" : {
-            "type" : "integer"
-          },
-          "care_num" : {
-            "type" : "integer"
-          },
-          "pass" : {
-            "type" : "string"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updated_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "size" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "imageUrl" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "integer"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "phone_num" : {
-            "type" : "string"
-          }
-        }
-      },
-      "ServiceCollection" : {
-        "id" : "ServiceCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Service"
-            }
-          }
-        }
-      },
-      "Vehicle" : {
-        "id" : "Vehicle",
+      "Applicance" : {
+        "id" : "Applicance",
         "type" : "object",
         "properties" : {
           "id" : {
@@ -391,61 +346,66 @@
           }
         }
       },
-      "VehicleCollection" : {
-        "id" : "VehicleCollection",
+      "ApplicanceCollection" : {
+        "id" : "ApplicanceCollection",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Vehicle"
+              "$ref" : "Applicance"
             }
           }
         }
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService" : {
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getApplicance" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Applicance"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService" : {
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.insertApplicance" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Applicance"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Applicance"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService" : {
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.deleteApplicance" : {
+      },
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.deCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Applicance"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.inCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Applicance"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.updateViApplicance" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Applicance"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Applicance"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService" : {
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getApplicanceByDistance" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "ApplicanceCollection"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getVihicleByCategoryAndLocation" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "ApplicanceCollection"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory" : {
+      "com.kenshin.SyntheticAd.model.ApplicanceObjectManager.getApplicanceByKeyword" : {
         "response" : {
-          "$ref" : "ServiceCollection"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword" : {
-        "response" : {
-          "$ref" : "VehicleCollection"
+          "$ref" : "ApplicanceCollection"
         }
       }
     }

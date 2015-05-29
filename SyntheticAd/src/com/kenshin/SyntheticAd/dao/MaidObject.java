@@ -16,6 +16,43 @@ import com.kenshin.SyntheticAd.dto.Job;
 
 public class MaidObject extends JobObject {
 
+	public Maid getMaidById(Connection connection, String post_id)
+			throws Exception {
+		Maid n_Maid = new Maid();
+		Job n_Job = new Job();
+		
+		n_Job = getJob(connection, post_id);
+		n_Maid.setMaid(n_Job);
+		
+		Database database = new Database();
+		Connection cont = database.getConnect();
+		
+		try {
+			
+			PreparedStatement ps = cont
+					.prepareStatement("SELECT * FROM testcraighslist.maid WHERE maid.post_id = ?;");
+			ps.setString(1, post_id);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				n_Maid.setArea(rs.getString("area"));
+				n_Maid.setStart_time(rs.getString("time_start"));
+				n_Maid.setEnd_time(rs.getString("time_end"));
+			}
+			
+			cont.close();
+			return n_Maid;
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			if (connection != null)
+				connection.close();
+		}
+
+		return n_Maid;
+	}
+
 	public ArrayList<Maid> getMaidByCategoryAndLocation(Connection connection,
 			String category_id, String location_id, String type, String offset)
 			throws Exception {
@@ -40,6 +77,7 @@ public class MaidObject extends JobObject {
 			n_maid.setPass(datas.get(i).getPass());
 			n_maid.setPhone_num(datas.get(i).getPhone_num());
 			n_maid.setLocation_id(datas.get(i).getLocation_id());
+			n_maid.setImageUrl(datas.get(i).getImageUrl());
 			n_maid.setLat(datas.get(i).getLat());
 			n_maid.setLon(datas.get(i).getLon());
 			n_maid.setUpdated_at(datas.get(i).getUpdated_at());
@@ -132,7 +170,10 @@ public class MaidObject extends JobObject {
 		deleteJob(connection, id);
 
 		try {
-			PreparedStatement ps = connection
+			Database database = new Database();
+			Connection con = database.getConnect();
+			
+			PreparedStatement ps = con
 					.prepareStatement("DELETE FROM `testcraighslist`.`maid` WHERE `post_id`= ? ;");
 			ps.setLong(1, Long.parseLong(id));
 
@@ -148,16 +189,17 @@ public class MaidObject extends JobObject {
 		return true;
 	}
 
-	public Maid updateMaid(Connection connection, Maid maid)
-			throws Exception {
+	public Maid updateMaid(Connection connection, Maid maid) throws Exception {
 
 		Job n_Job = new Job();
 		n_Job = maid.createJob();
-
+		System.out.println("id: " + maid.getId() + " post_id: "
+				+ maid.getPost_id());
 		updateJob(connection, n_Job);
 
 		try {
-			
+			Database database = new Database();
+			Connection con = database.getConnect();
 			String queryToJob = "UPDATE `testcraighslist`.`maid` SET ";
 			StringBuilder build = new StringBuilder(queryToJob);
 
@@ -168,41 +210,28 @@ public class MaidObject extends JobObject {
 			if (maid.getArea() != 0) {
 				build.append(" `area` = '" + maid.getArea() + "',");
 			}
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd HH:mm:ss");
+
+			if (maid.getStart_time() != null) {
+				build.append(" `time_start` = '"
+						+ simpleDateFormat.format(maid.getStart_time()) + "',");
+			}
+
+			if (maid.getEnd_time() != null) {
+				build.append(" `time_end`= '"
+						+ simpleDateFormat.format(maid.getEnd_time()) + "',");
+			}
 
 			build.deleteCharAt(build.length() - 1);
 
-			build.append("WHERE `post_id` = '" + maid.getPost_id() + "';");
+			build.append(" WHERE `post_id` = '" + maid.getPost_id() + "';");
 
 			System.out.println(build.toString());
 
-			PreparedStatement ps = connection
-					.prepareStatement(build.toString());
+			PreparedStatement ps = con.prepareStatement(build.toString());
+
 			System.out.println(ps.executeUpdate());
-
-			String queryToTitle = "UPDATE `testcraighslist`.`title` SET ";
-			StringBuilder build1 = new StringBuilder(queryToTitle);
-
-			if (maid.getTitle() != null) {
-				build1.append("`title`= '" + maid.getTitle() + "',");
-			}
-			if (maid.getType() != 0) {
-				build1.append(" `type` = '" + maid.getType() + "',");
-			}
-
-			if (maid.getLocation_id() != 0) {
-				build1.append(" `location_id` = '" + maid.getLocation_id()
-						+ "',");
-			}
-
-			build1.deleteCharAt(build.length() - 1);
-
-			build1.append("WHERE `post_id` = '" + maid.getPost_id()
-					+ "AND `category_id`= '" + maid.getCategory_id() + "';");
-
-			PreparedStatement ps1 = connection.prepareStatement(build1
-					.toString());
-
-			System.out.println(ps1.executeUpdate());
 
 		} catch (Exception e) {
 			// TODO: handle exception

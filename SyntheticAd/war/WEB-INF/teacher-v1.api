@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://even-envoy-89503.appspot.com/_ah/api",
-  "name" : "service",
+  "name" : "teacher",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -24,19 +24,31 @@
     "maxAge" : 0
   },
   "methods" : {
-    "service.getservicebyid" : {
-      "path" : "service/{id}",
-      "httpMethod" : "GET",
+    "teacher.decreaseCareNum" : {
+      "path" : "teacherDeCreaseCareNum",
+      "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.deCreaseCareNum",
       "request" : {
         "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
           "id" : {
             "type" : "string",
             "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
           }
         },
         "body" : "empty"
@@ -45,52 +57,47 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.servicecreate" : {
-      "path" : "service",
+    "teacher.increaseCareNum" : {
+      "path" : "teacherInCreaseCareNum",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.inCreaseCareNum",
       "request" : {
         "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
           "password" : {
             "type" : "string",
             "required" : false
           }
         },
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.updateservice" : {
-      "path" : "service",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.servicedelete" : {
-      "path" : "service/{id}",
+    "teacher.teacherdelete" : {
+      "path" : "teacher/{id}",
       "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.deleteTeacher",
       "request" : {
         "parameters" : {
           "id" : {
@@ -104,80 +111,73 @@
         "body" : "empty"
       }
     },
-    "service.decreaseCareNum" : {
-      "path" : "serviceDeCreaseCareNum",
+    "teacher.teachercreate" : {
+      "path" : "teacher",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.insertTeacher",
       "request" : {
         "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "user_id" : {
-            "type" : "string",
-            "required" : false
-          },
           "password" : {
             "type" : "string",
             "required" : false
           }
         },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.increaseCareNum" : {
-      "path" : "serviceInCreaseCareNum",
-      "httpMethod" : "POST",
+    "teacher.teacherupdate" : {
+      "path" : "teacher",
+      "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.updateTeacher",
       "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "user_id" : {
-            "type" : "string",
-            "required" : false
-          },
-          "password" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.getservice" : {
-      "path" : "servicecollection/{category_id}/{location_id}/{type}",
+    "teacher.getteacherbyid" : {
+      "path" : "teacher/{post_id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.getTeacherByID",
+      "request" : {
+        "parameters" : {
+          "post_id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "teacher.getteacherbylocationandcategory" : {
+      "path" : "teachercollection/{category_id}/{location_id}/{type}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherObjectManager.getTeacherLocationAndCategory",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -202,45 +202,97 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
-    },
-    "service.vehicleByKeyword" : {
-      "path" : "vehiclecollection/{category_id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword",
-      "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "keyword" : {
-            "type" : "string",
-            "required" : false
-          },
-          "location_id" : {
-            "type" : "string",
-            "required" : false
-          },
-          "type" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "Service" : {
-        "id" : "Service",
+      "Teacher" : {
+        "id" : "Teacher",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "category_id" : {
+            "type" : "integer"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "condition" : {
+            "type" : "integer"
+          },
+          "user_id" : {
+            "type" : "integer"
+          },
+          "location_id" : {
+            "type" : "integer"
+          },
+          "lat" : {
+            "type" : "number"
+          },
+          "lon" : {
+            "type" : "number"
+          },
+          "extend_type" : {
+            "type" : "integer"
+          },
+          "care_num" : {
+            "type" : "integer"
+          },
+          "pass" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "size" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "integer"
+          },
+          "address" : {
+            "type" : "string"
+          },
+          "phone_num" : {
+            "type" : "string"
+          },
+          "teacher_id" : {
+            "type" : "integer"
+          },
+          "post_id" : {
+            "type" : "integer"
+          },
+          "subject_id" : {
+            "type" : "integer"
+          },
+          "maid" : {
+            "$ref" : "Job"
+          },
+          "grade" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "Job" : {
+        "id" : "Job",
         "type" : "object",
         "properties" : {
           "id" : {
@@ -309,143 +361,56 @@
           }
         }
       },
-      "ServiceCollection" : {
-        "id" : "ServiceCollection",
+      "TeacherCollection" : {
+        "id" : "TeacherCollection",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Service"
-            }
-          }
-        }
-      },
-      "Vehicle" : {
-        "id" : "Vehicle",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer"
-          },
-          "category_id" : {
-            "type" : "integer"
-          },
-          "title" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "price" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "condition" : {
-            "type" : "integer"
-          },
-          "user_id" : {
-            "type" : "integer"
-          },
-          "location_id" : {
-            "type" : "integer"
-          },
-          "lat" : {
-            "type" : "number"
-          },
-          "lon" : {
-            "type" : "number"
-          },
-          "extend_type" : {
-            "type" : "integer"
-          },
-          "care_num" : {
-            "type" : "integer"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updated_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "size" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "pass" : {
-            "type" : "string"
-          },
-          "imageUrl" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "integer"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "phone_num" : {
-            "type" : "string"
-          }
-        }
-      },
-      "VehicleCollection" : {
-        "id" : "VehicleCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Vehicle"
+              "$ref" : "Teacher"
             }
           }
         }
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService" : {
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.deCreaseCareNum" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Teacher"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService" : {
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.inCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Teacher"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.deleteTeacher" : {
+      },
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.insertTeacher" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Teacher"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Teacher"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService" : {
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.updateTeacher" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "Teacher"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Teacher"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService" : {
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.getTeacherByID" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "Teacher"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.TeacherObjectManager.getTeacherLocationAndCategory" : {
         "response" : {
-          "$ref" : "Service"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory" : {
-        "response" : {
-          "$ref" : "ServiceCollection"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword" : {
-        "response" : {
-          "$ref" : "VehicleCollection"
+          "$ref" : "TeacherCollection"
         }
       }
     }

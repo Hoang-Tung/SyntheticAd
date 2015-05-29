@@ -17,7 +17,7 @@ public class Maid extends Job {
 		super();
 	}
 	
-	public Maid(Service parrent){
+	public Maid(Job parrent){
 		super();
 	}
 	
@@ -136,7 +136,7 @@ public class Maid extends Job {
 	
 	public Job createJob(){
 		Job n_Job = new Job();
-		
+		n_Job.setId("" +this.getPost_id());
 		n_Job.setAddress(this.getAddress());
 		n_Job.setCare_num(String.valueOf(this.getCare_num()));
 		n_Job.setCategory_id(String.valueOf(this.getCategory_id()));
@@ -149,6 +149,27 @@ public class Maid extends Job {
 		n_Job.setSize(String.valueOf(this.getSize()));
 		
 		return n_Job;
+	}
+	
+	public void setMaid(Job datas){
+		this.setId(datas.getId());
+		this.setTitle(datas.getTitle());
+		this.setDescription(datas.getDescription());
+		this.setPrice(datas.getPrice());
+		this.setCategory_id(datas.getCategory_id());
+		this.setAddress(datas.getAddress());
+		this.setPass(datas.getPass());
+		this.setPhone_num(datas.getPhone_num());
+		this.setLocation_id(datas.getLocation_id());
+		this.setImageUrl(datas.getImageUrl());
+		this.setLat(datas.getLat());
+		this.setLon(datas.getLon());
+		this.setUpdated_at(datas.getUpdated_at());
+		this.setCreated_at(datas.getCreated_at());
+		this.setCondition(datas.getCondition());
+		this.setType(datas.getType());
+		this.setUser_id(datas.getUser_id());
+		this.setCare_num(datas.getCare_num());
 	}
 	
 }

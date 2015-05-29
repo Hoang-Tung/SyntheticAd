@@ -102,12 +102,12 @@
           "minimalDaysInFirstWeek" : {
             "type" : "integer"
           },
-          "timeZone" : {
-            "$ref" : "TimeZone"
-          },
           "timeInMillis" : {
             "type" : "string",
             "format" : "int64"
+          },
+          "timeZone" : {
+            "$ref" : "TimeZone"
           },
           "calendarType" : {
             "type" : "string"

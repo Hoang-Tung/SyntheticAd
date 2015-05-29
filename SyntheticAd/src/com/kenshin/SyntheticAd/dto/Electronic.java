@@ -4,7 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.apphosting.api.DatastorePb.GetResponse.Entity;
+
 public class Electronic {
+	
 	private int id;
 	private int category_id;
 	private String title;
@@ -13,8 +16,8 @@ public class Electronic {
 	private int condition;
 	private int user_id;
 	private int location_id;
-	private float lat;
-	private float lon;
+	private Double lat;
+	private Double lon;
 	private int extend_type;
 	private int care_num;
 	private Date created_at;
@@ -26,18 +29,6 @@ public class Electronic {
 	private String address;
 	private String phone_num;
 	
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPhone_num() {
-		return phone_num;
-	}
-	public void setPhone_num(String phone_num) {
-		this.phone_num = phone_num;
-	}
 	public int getId() {
 		return id;
 	}
@@ -80,17 +71,17 @@ public class Electronic {
 	public void setLocation_id(String location_id) {
 		this.location_id = Integer.parseInt(location_id);
 	}
-	public float getLat() {
+	public Double getLat() {
 		return lat;
 	}
 	public void setLat(String lat) {
-		this.lat = Float.parseFloat(lat);
+		this.lat = Double.parseDouble(lat);
 	}
-	public float getLon() {
+	public Double getLon() {
 		return lon;
 	}
 	public void setLon(String lon) {
-		this.lon = Float.parseFloat(lon);
+		this.lon = Double.parseDouble(lon);
 	}
 	public int getExtend_type() {
 		return extend_type;
@@ -158,5 +149,17 @@ public class Electronic {
 	}
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+	public String getPhone_num() {
+		return phone_num;
+	}
+	public void setPhone_num(String phone_num) {
+		this.phone_num = phone_num;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

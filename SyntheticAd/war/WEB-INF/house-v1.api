@@ -2,7 +2,7 @@
   "extends" : "thirdParty.api",
   "abstract" : false,
   "root" : "https://even-envoy-89503.appspot.com/_ah/api",
-  "name" : "service",
+  "name" : "house",
   "version" : "v1",
   "defaultVersion" : false,
   "adapter" : {
@@ -24,57 +24,14 @@
     "maxAge" : 0
   },
   "methods" : {
-    "service.getservicebyid" : {
-      "path" : "service/{id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService",
-      "request" : {
-        "parameters" : {
-          "id" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.servicecreate" : {
-      "path" : "service",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService",
-      "request" : {
-        "parameters" : {
-          "password" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.updateservice" : {
-      "path" : "service",
+    "house.houseupdate" : {
+      "path" : "house",
       "httpMethod" : "PUT",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.updateViHouse",
       "request" : {
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
@@ -83,14 +40,90 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.servicedelete" : {
-      "path" : "service/{id}",
+    "house.house" : {
+      "path" : "house/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.getHouse",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "house.housecreate" : {
+      "path" : "house",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.insertHouse",
+      "request" : {
+        "parameters" : {
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "house.decreaseCareNum" : {
+      "path" : "houseDeCreaseCareNum",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.deCreaseCareNum",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "house.housedelete" : {
+      "path" : "house/{id}",
       "httpMethod" : "DELETE",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.deleteHouse",
       "request" : {
         "parameters" : {
           "id" : {
@@ -104,14 +137,14 @@
         "body" : "empty"
       }
     },
-    "service.decreaseCareNum" : {
-      "path" : "serviceDeCreaseCareNum",
+    "house.increaseCareNum" : {
+      "path" : "houseInCreaseCareNum",
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.inCreaseCareNum",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -137,80 +170,14 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
-    "service.increaseCareNum" : {
-      "path" : "serviceInCreaseCareNum",
-      "httpMethod" : "POST",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum",
-      "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "user_id" : {
-            "type" : "string",
-            "required" : false
-          },
-          "password" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.getservice" : {
-      "path" : "servicecollection/{category_id}/{location_id}/{type}",
+    "house.houseByKeyword" : {
+      "path" : "housecollection/{category_id}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
       "audiences" : [ ],
       "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory",
-      "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "location_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "type" : {
-            "type" : "string",
-            "required" : true
-          },
-          "offset" : {
-            "type" : "string",
-            "required" : false
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "service.vehicleByKeyword" : {
-      "path" : "vehiclecollection/{category_id}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword",
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.getHouseByKeyword",
       "request" : {
         "parameters" : {
           "category_id" : {
@@ -235,94 +202,82 @@
       "response" : {
         "body" : "autoTemplate(backendResponse)"
       }
+    },
+    "house.houseByDistance" : {
+      "path" : "housecollection",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.getHouseByDistance",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "distance" : {
+            "type" : "double",
+            "required" : false
+          },
+          "offset" : {
+            "type" : "int32",
+            "required" : false
+          },
+          "lat" : {
+            "type" : "double",
+            "required" : false
+          },
+          "lon" : {
+            "type" : "double",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "house.houseByCategoryAndLocation" : {
+      "path" : "housecollection/{category_id}/{location_id}/{type}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.HouseObjectManager.getVihicleByCategoryAndLocation",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "location_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "type" : {
+            "type" : "string",
+            "required" : true
+          },
+          "offset" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
     }
   },
   "descriptor" : {
     "schemas" : {
-      "Service" : {
-        "id" : "Service",
-        "type" : "object",
-        "properties" : {
-          "id" : {
-            "type" : "integer"
-          },
-          "category_id" : {
-            "type" : "integer"
-          },
-          "title" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "price" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "condition" : {
-            "type" : "integer"
-          },
-          "user_id" : {
-            "type" : "integer"
-          },
-          "location_id" : {
-            "type" : "integer"
-          },
-          "lat" : {
-            "type" : "number"
-          },
-          "lon" : {
-            "type" : "number"
-          },
-          "extend_type" : {
-            "type" : "integer"
-          },
-          "care_num" : {
-            "type" : "integer"
-          },
-          "pass" : {
-            "type" : "string"
-          },
-          "created_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "updated_at" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
-          "size" : {
-            "type" : "number",
-            "format" : "float"
-          },
-          "imageUrl" : {
-            "type" : "string"
-          },
-          "type" : {
-            "type" : "integer"
-          },
-          "address" : {
-            "type" : "string"
-          },
-          "phone_num" : {
-            "type" : "string"
-          }
-        }
-      },
-      "ServiceCollection" : {
-        "id" : "ServiceCollection",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "Service"
-            }
-          }
-        }
-      },
-      "Vehicle" : {
-        "id" : "Vehicle",
+      "House" : {
+        "id" : "House",
         "type" : "object",
         "properties" : {
           "id" : {
@@ -391,61 +346,66 @@
           }
         }
       },
-      "VehicleCollection" : {
-        "id" : "VehicleCollection",
+      "HouseCollection" : {
+        "id" : "HouseCollection",
         "type" : "object",
         "properties" : {
           "items" : {
             "type" : "array",
             "items" : {
-              "$ref" : "Vehicle"
+              "$ref" : "House"
             }
           }
         }
       }
     },
     "methods" : {
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getService" : {
-        "response" : {
-          "$ref" : "Service"
-        }
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.createService" : {
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.updateViHouse" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "House"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "House"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.updateService" : {
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.getHouse" : {
+        "response" : {
+          "$ref" : "House"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.insertHouse" : {
         "request" : {
-          "$ref" : "Service"
+          "$ref" : "House"
         },
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "House"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deleteService" : {
-      },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.deCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.deCreaseCareNum" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "House"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.inCreaseCareNum" : {
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.deleteHouse" : {
+      },
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.inCreaseCareNum" : {
         "response" : {
-          "$ref" : "Service"
+          "$ref" : "House"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getServiceLocationAndCategory" : {
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.getHouseByKeyword" : {
         "response" : {
-          "$ref" : "ServiceCollection"
+          "$ref" : "HouseCollection"
         }
       },
-      "com.kenshin.SyntheticAd.model.ServiceObjectManager.getVehicleByKeyword" : {
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.getHouseByDistance" : {
         "response" : {
-          "$ref" : "VehicleCollection"
+          "$ref" : "HouseCollection"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.HouseObjectManager.getVihicleByCategoryAndLocation" : {
+        "response" : {
+          "$ref" : "HouseCollection"
         }
       }
     }

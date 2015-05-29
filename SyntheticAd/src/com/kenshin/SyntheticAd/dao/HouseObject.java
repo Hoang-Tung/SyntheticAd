@@ -10,88 +10,89 @@ import java.util.regex.Pattern;
 
 import com.kenshin.SyntheticAd.Constant;
 import com.kenshin.SyntheticAd.dto.Post;
-import com.kenshin.SyntheticAd.dto.Vehicle;
+import com.kenshin.SyntheticAd.dto.House;
+import com.kenshin.SyntheticAd.dto.House;
 
-public class VehicleObject {
-	public ArrayList<Vehicle> getAll(Connection connection, String offset)
+public class HouseObject {
+//	public ArrayList<House> getAll(Connection connection, String offset)
+//			throws Exception {
+//
+//		ArrayList<House> datas = new ArrayList<House>();
+//		try {
+//			PreparedStatement ps = connection
+//					.prepareStatement("SELECT * FROM testcraighslist.house ORDER BY house.updated_at DESC LIMIT 10 OFFSET ? ");
+//			ps.setLong(1, Long.parseLong(offset));
+//			ResultSet rs = ps.executeQuery();
+//
+//			while (rs.next()) {
+//				House c = new House();
+//				c.setId(rs.getString("id"));
+//				c.setUser_id(rs.getString("user_id"));
+//				c.setTitle(rs.getString("title"));
+//				c.setCategory_id(rs.getString("category_id"));
+//				c.setDescription(rs.getString("description"));
+//				c.setType(rs.getString("type"));
+//				c.setPrice(rs.getString("price"));
+//				if (rs.getString("lon") != null) {
+//					c.setLon(rs.getString("lon"));
+//				}
+//				if (rs.getString("lat") != null) {
+//					c.setLat(rs.getString("lat"));
+//				}
+//				c.setLocation_id(rs.getString("location_id"));
+//				if (rs.getString("image_url") != null) {
+//					c.setImageUrl(rs.getString("image_url"));
+//				}
+//				if (rs.getString("condition") != null) {
+//					c.setCondition(rs.getString("condition"));
+//				}
+//				if (rs.getString("extend_type") != null) {
+//					c.setExtend_type(rs.getString("extend_type"));
+//				}
+//				if (rs.getString("pass") != null) {
+//					c.setPass(rs.getString("pass"));
+//				}
+//				c.setCare_num(rs.getString("care_num"));
+//				if (rs.getString("size") != null)
+//					c.setSize(rs.getString("size"));
+//				c.setCreated_at(rs.getString("created_at"));
+//				c.setUpdated_at(rs.getString("updated_at"));
+//				c.setAddress(rs.getString("address"));
+//				if (rs.getString("phone_num") != null)
+//					c.setPhone_num(rs.getString("phone_num"));
+//
+//				datas.add(c);
+//			}
+//			connection.close();
+//			return datas;
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			throw e;
+//		} finally {
+//			if (connection != null)
+//				connection.close();
+//		}
+//	}
+
+	public ArrayList<House> searchHouse(Connection connection,
+			String title, String category_id, String location_id, String type)
 			throws Exception {
-
-		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
-		try {
-			PreparedStatement ps = connection
-					.prepareStatement("SELECT * FROM testcraighslist.vehicle ORDER BY vehicle.updated_at DESC LIMIT 10 OFFSET ? ");
-			ps.setLong(1, Long.parseLong(offset));
-			ResultSet rs = ps.executeQuery();
-
-			while (rs.next()) {
-				Vehicle c = new Vehicle();
-				c.setId(rs.getString("id"));
-				c.setUser_id(rs.getString("user_id"));
-				c.setTitle(rs.getString("title"));
-				c.setCategory_id(rs.getString("category_id"));
-				c.setDescription(rs.getString("description"));
-				c.setType(rs.getString("type"));
-				c.setPrice(rs.getString("price"));
-				if (rs.getString("lon") != null) {
-					c.setLon(rs.getString("lon"));
-				}
-				if (rs.getString("lat") != null) {
-					c.setLat(rs.getString("lat"));
-				}
-				c.setLocation_id(rs.getString("location_id"));
-				if (rs.getString("image_url") != null) {
-					c.setImageUrl(rs.getString("image_url"));
-				}
-				if (rs.getString("condition") != null) {
-					c.setCondition(rs.getString("condition"));
-				}
-				if (rs.getString("extend_type") != null) {
-					c.setExtend_type(rs.getString("extend_type"));
-				}
-				if (rs.getString("pass") != null) {
-					c.setPass(rs.getString("pass"));
-				}
-				c.setCare_num(rs.getString("care_num"));
-				if (rs.getString("size") != null)
-					c.setSize(rs.getString("size"));
-				c.setCreated_at(rs.getString("created_at"));
-				c.setUpdated_at(rs.getString("updated_at"));
-				c.setAddress(rs.getString("address"));
-				if (rs.getString("phone_num") != null)
-					c.setPhone_num(rs.getString("phone_num"));
-
-				datas.add(c);
-			}
-			connection.close();
-			return datas;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		} finally {
-			if (connection != null)
-				connection.close();
-		}
-	}
-
-	public ArrayList<Vehicle> searchVehicle(Connection connection,
-			String vehicle, String category_id, String location_id, String type)
-			throws Exception {
-		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
+		ArrayList<House> datas = new ArrayList<House>();
 
 		return datas;
 	}
 
-	public Vehicle getVehicle(Connection connection, String location_id)
+	public House getHouse(Connection connection, String location_id)
 			throws Exception {
-		Vehicle vehicle = new Vehicle();
+		House house = new House();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("SELECT * FROM testcraighslist.vehicle WHERE vehicle.id = ? ");
+					.prepareStatement("SELECT * FROM testcraighslist.house WHERE house.id = ? ");
 			ps.setString(1, location_id);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Vehicle c = new Vehicle();
+				House c = new House();
 				c.setId(rs.getString("id"));
 				c.setUser_id(rs.getString("user_id"));
 				c.setTitle(rs.getString("title"));
@@ -127,10 +128,10 @@ public class VehicleObject {
 				if (rs.getString("phone_num") != null)
 					c.setPhone_num(rs.getString("phone_num"));
 
-				vehicle = c;
+				house = c;
 			}
 			connection.close();
-			return vehicle;
+			return house;
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw e;
@@ -140,41 +141,52 @@ public class VehicleObject {
 		}
 	}
 
-	public ArrayList<Vehicle> getByLocationAndCategory(Connection connection,
+	public ArrayList<House> getByLocationAndCategory(Connection connection,
 			String category_id, String location_id, String type, String offset)
 			throws Exception {
-		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
+		ArrayList<House> datas = new ArrayList<House>();
 		try {
 			PreparedStatement ps;
 			if (Long.parseLong(location_id) == 0) {
 				System.out.println("no location" + Long.parseLong(location_id));
 				ps = connection
-						.prepareStatement("SELECT * FROM testcraighslist.vehicle WHERE vehicle.category_id = ? AND vehicle.type = ? ORDER BY vehicle.updated_at DESC LIMIT 10 OFFSET ?");
+						.prepareStatement("SELECT * FROM testcraighslist.house WHERE house.category_id = ? AND house.type = ? ORDER BY house.created_at DESC LIMIT 10 OFFSET ?");
 				ps.setLong(1, Long.parseLong(category_id));
 				ps.setLong(2, Long.parseLong(type));
 				ps.setLong(3, Long.parseLong(offset));
 
+				// rs = ps.executeQuery();
+
 			} else {
 				ps = connection
-						.prepareStatement("SELECT * FROM testcraighslist.vehicle WHERE vehicle.location_id = ? AND vehicle.category_id = ? AND vehicle.type = ? ORDER BY vehicle.updated_at DESC LIMIT 10 OFFSET ?");
+						.prepareStatement("SELECT * FROM testcraighslist.house WHERE house.location_id = ? AND house.category_id = ? AND house.type = ? ORDER BY house.created_at DESC LIMIT 10 OFFSET ?");
 				System.out.println("detected location");
 				ps.setLong(1, Long.parseLong(location_id));
 				ps.setLong(2, Long.parseLong(category_id));
 				ps.setLong(3, Long.parseLong(type));
 				ps.setLong(4, Long.parseLong(offset));
+				// rs = ps.executeQuery();
 			}
 
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Vehicle c = new Vehicle();
+				System.out.println("have result");
+				House c = new House();
 				c.setId(rs.getString("id"));
+				System.out.println(rs.getString("id"));
 				c.setUser_id(rs.getString("user_id"));
+				System.out.println(rs.getString("user_id"));
 				c.setTitle(rs.getString("title"));
+				System.out.println(rs.getString("title"));
 				c.setCategory_id(rs.getString("category_id"));
+				System.out.println(rs.getString("category_id"));
 				c.setDescription(rs.getString("description"));
+				System.out.println(rs.getString("description"));
 				c.setType(rs.getString("type"));
+				System.out.println(rs.getString("type"));
 				c.setPrice(rs.getString("price"));
+				System.out.println(rs.getString("price"));
 				if (rs.getString("lon") != null) {
 					c.setLon(rs.getString("lon"));
 				}
@@ -182,6 +194,7 @@ public class VehicleObject {
 					c.setLat(rs.getString("lat"));
 				}
 				c.setLocation_id(rs.getString("location_id"));
+				System.out.println(rs.getString("location_id"));
 				if (rs.getString("image_url") != null) {
 					c.setImageUrl(rs.getString("image_url"));
 				}
@@ -195,6 +208,7 @@ public class VehicleObject {
 					c.setExtend_type(rs.getString("pass"));
 				}
 				c.setCare_num(rs.getString("care_num"));
+				System.out.println(rs.getString("care_num"));
 				if (rs.getString("size") != null)
 					c.setSize(rs.getString("size"));
 				if (rs.getString("created_at") != null)
@@ -202,6 +216,7 @@ public class VehicleObject {
 				if (rs.getString("updated_at") != null)
 					c.setUpdated_at(rs.getString("updated_at"));
 				c.setAddress(rs.getString("address"));
+				System.out.println(rs.getString("address"));
 				if (rs.getString("phone_num") != null)
 					c.setPhone_num(rs.getString("phone_num"));
 
@@ -218,71 +233,71 @@ public class VehicleObject {
 		}
 	}
 
-	public Vehicle updateVehicle(Connection connection, Vehicle vehicle)
+	public House updateHouse(Connection connection, House house)
 			throws Exception {
-		Vehicle nVehicle = new Vehicle();
+		House nHouse = new House();
 
 		try {
-			String query = "UPDATE `testcraighslist`.`vehicle` SET ";
+			String query = "UPDATE `testcraighslist`.`house` SET ";
 			StringBuilder build = new StringBuilder(query);
 
-			if (vehicle.getTitle() != null) {
-				build.append("`title`= '" + vehicle.getTitle() + "',");
+			if (house.getTitle() != null) {
+				build.append("`title`= '" + house.getTitle() + "',");
 			}
 
-			if (vehicle.getDescription() != null) {
-				build.append("`description` = '" + vehicle.getDescription()
+			if (house.getDescription() != null) {
+				build.append("`description` = '" + house.getDescription()
 						+ "',");
 			}
 
-			if (vehicle.getPrice() != 0) {
-				build.append(" `price` = '" + vehicle.getPrice() + "',");
+			if (house.getPrice() != 0) {
+				build.append(" `price` = '" + house.getPrice() + "',");
 			}
 
-			if (vehicle.getCondition() != 0) {
-				build.append(" `condition` = '" + vehicle.getCondition() + "',");
+			if (house.getCondition() != 0) {
+				build.append(" `condition` = '" + house.getCondition() + "',");
 			}
 
-			if (vehicle.getType() != 0) {
-				build.append(" `type` = '" + vehicle.getType() + "',");
+			if (house.getType() != 0) {
+				build.append(" `type` = '" + house.getType() + "',");
 			}
 
-			if (vehicle.getLocation_id() != 0) {
-				build.append(" `location_id` = '" + vehicle.getLocation_id()
+			if (house.getLocation_id() != 0) {
+				build.append(" `location_id` = '" + house.getLocation_id()
 						+ "',");
 			}
 
-			if (vehicle.getLat() != null) {
-				build.append(" `lat` = '" + vehicle.getLat() + "',");
+			if (house.getLat() != null) {
+				build.append(" `lat` = '" + house.getLat() + "',");
 			}
 
-			if (vehicle.getLon() != null) {
-				build.append(" `lon` = '" + vehicle.getLon() + "',");
+			if (house.getLon() != null) {
+				build.append(" `lon` = '" + house.getLon() + "',");
 			}
 
-			if (vehicle.getCare_num() != 0) {
-				build.append(" `care_num` = '" + vehicle.getCare_num() + "',");
+			if (house.getCare_num() != 0) {
+				build.append(" `care_num` = '" + house.getCare_num() + "',");
 			}
 
-			if (vehicle.getSize() != 0) {
-				build.append(" `size` = '" + vehicle.getSize() + "',");
+			if (house.getSize() != 0) {
+				build.append(" `size` = '" + house.getSize() + "',");
 			}
 
-			if (vehicle.getPass() != null) {
-				build.append(" `pass` = '" + vehicle.getPass() + "',");
+			if (house.getPass() != null) {
+				build.append(" `pass` = '" + house.getPass() + "',");
 			}
 
-			if (vehicle.getAddress() != null) {
-				build.append(" `address` = '" + vehicle.getAddress() + "',");
+			if (house.getAddress() != null) {
+				build.append(" `address` = '" + house.getAddress() + "',");
 			}
 
-			if (vehicle.getPhone_num() != null) {
-				build.append(" `phone_num` = '" + vehicle.getPhone_num() + "',");
+			if (house.getPhone_num() != null) {
+				build.append(" `phone_num` = '" + house.getPhone_num() + "',");
 			}
 
 			build.deleteCharAt(build.length() - 1);
 
-			build.append("WHERE `id` = '" + vehicle.getId() + "';");
+			build.append("WHERE `id` = '" + house.getId() + "';");
 
 			System.out.println(build.toString());
 
@@ -293,22 +308,22 @@ public class VehicleObject {
 			String queryToTitle = "UPDATE `testcraighslist`.`title` SET ";
 			StringBuilder build1 = new StringBuilder(queryToTitle);
 
-			if (vehicle.getTitle() != null) {
-				build1.append("`title`= '" + vehicle.getTitle() + "',");
+			if (house.getTitle() != null) {
+				build1.append("`title`= '" + house.getTitle() + "',");
 			}
-			if (vehicle.getType() != 0) {
-				build1.append(" `type` = '" + vehicle.getType() + "',");
+			if (house.getType() != 0) {
+				build1.append(" `type` = '" + house.getType() + "',");
 			}
 
-			if (vehicle.getLocation_id() != 0) {
-				build1.append(" `location_id` = '" + vehicle.getLocation_id()
+			if (house.getLocation_id() != 0) {
+				build1.append(" `location_id` = '" + house.getLocation_id()
 						+ "',");
 			}
 
 			build1.deleteCharAt(build.length() - 1);
 
-			build1.append("WHERE `post_id` = '" + vehicle.getId()
-					+ "AND `category_id`= '" + vehicle.getCategory_id() + "';");
+			build1.append("WHERE `post_id` = '" + house.getId()
+					+ "AND `category_id`= '" + house.getCategory_id() + "';");
 
 			PreparedStatement ps1 = connection.prepareStatement(build1
 					.toString());
@@ -323,18 +338,18 @@ public class VehicleObject {
 				connection.close();
 		}
 
-		return nVehicle;
+		return nHouse;
 	}
 
-	public Vehicle insertVehicle(Connection connection, Vehicle vehicle,
+	public House insertHouse(Connection connection, House house,
 			String password) throws Exception {
 		// TODO Auto-generated method stub
-		Vehicle nVehicle = new Vehicle();
+		House nHouse = new House();
 
 		try {
 			PreparedStatement preps = connection
 					.prepareStatement("SELECT * FROM testcraighslist.user WHERE user.id = ? AND user.password = ?;");
-			preps.setLong(1, vehicle.getUser_id());
+			preps.setLong(1, house.getUser_id());
 			preps.setString(2, password);
 
 			ResultSet rs = preps.executeQuery();
@@ -344,33 +359,33 @@ public class VehicleObject {
 			}
 
 			PreparedStatement ps = connection
-					.prepareStatement("INSERT INTO `testcraighslist`.`vehicle` (`category_id`,"
+					.prepareStatement("INSERT INTO `testcraighslist`.`house` (`category_id`,"
 							+ " `title`, `description`, `price`, `condition`, `user_id`, `type`, `location_id`, `pass`, `image_url`, `address`, `phone_num`, `lat`, `lon`) "
 							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			ps.setLong(1, vehicle.getCategory_id());
-			ps.setString(2, vehicle.getTitle());
-			ps.setString(3, vehicle.getDescription());
-			ps.setLong(4, (long) vehicle.getPrice());
-			ps.setLong(5, vehicle.getCondition());
-			ps.setLong(6, vehicle.getUser_id());
-			ps.setLong(7, vehicle.getType());
-			ps.setLong(8, vehicle.getLocation_id());
-			ps.setString(9, vehicle.getPass());
-			ps.setString(10, vehicle.getImageUrl());
-			ps.setString(11, vehicle.getAddress());
+			ps.setLong(1, house.getCategory_id());
+			ps.setString(2, house.getTitle());
+			ps.setString(3, house.getDescription());
+			ps.setLong(4, (long) house.getPrice());
+			ps.setLong(5, house.getCondition());
+			ps.setLong(6, house.getUser_id());
+			ps.setLong(7, house.getType());
+			ps.setLong(8, house.getLocation_id());
+			ps.setString(9, house.getPass());
+			ps.setString(10, house.getImageUrl());
+			ps.setString(11, house.getAddress());
 
-			if (vehicle.getPhone_num() != null) {
-				ps.setString(12, vehicle.getPhone_num());
+			if (house.getPhone_num() != null) {
+				ps.setString(12, house.getPhone_num());
 			} else {
 				ps.setString(12, "");
 			}
 
-			if (vehicle.getLat() != null)
-				ps.setString(13, String.valueOf(vehicle.getLat()));
+			if (house.getLat() != null)
+				ps.setString(13, String.valueOf(house.getLat()));
 			else
 				ps.setLong(13, 0);
-			if (vehicle.getLon() != null)
-				ps.setString(14, String.valueOf(vehicle.getLon()));
+			if (house.getLon() != null)
+				ps.setString(14, String.valueOf(house.getLon()));
 			else
 				ps.setLong(14, 0);
 
@@ -383,12 +398,12 @@ public class VehicleObject {
 					PreparedStatement ps1 = connection
 							.prepareStatement("INSERT INTO `testcraighslist`.`title` (`category_id`, `post_id`, `title`, `user_id`, `location_id`, `type`)"
 									+ " VALUES (?, ?, ?, ?, ?, ?);");
-					ps1.setLong(1, vehicle.getCategory_id());
+					ps1.setLong(1, house.getCategory_id());
 					ps1.setLong(2, result.getLong(1));
-					ps1.setString(3, vehicle.getTitle());
-					ps1.setLong(4, vehicle.getUser_id());
-					ps1.setLong(5, vehicle.getLocation_id());
-					ps1.setLong(6, vehicle.getType());
+					ps1.setString(3, house.getTitle());
+					ps1.setLong(4, house.getUser_id());
+					ps1.setLong(5, house.getLocation_id());
+					ps1.setLong(6, house.getType());
 					ps1.executeUpdate();
 				}
 
@@ -397,7 +412,7 @@ public class VehicleObject {
 				throw e;
 			}
 			connection.close();
-			return nVehicle;
+			return nHouse;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -405,16 +420,16 @@ public class VehicleObject {
 			if (connection != null)
 				connection.close();
 		}
-		return nVehicle;
+		return nHouse;
 	}
 
-	public Vehicle deleteVehicle(Connection connection, String vehicle)
+	public House deleteHouse(Connection connection, String house)
 			throws Exception {
-		Vehicle nVehicle = new Vehicle();
+		House nHouse = new House();
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("DELETE FROM `testcraighslist`.`vehicle` WHERE `id`=?;");
-			ps.setLong(1, Long.parseLong(vehicle));
+					.prepareStatement("DELETE FROM `testcraighslist`.`house` WHERE `id`=?;");
+			ps.setLong(1, Long.parseLong(house));
 
 			System.out.println(ps.executeUpdate());
 			connection.close();
@@ -424,49 +439,35 @@ public class VehicleObject {
 			if (connection != null)
 				connection.close();
 		}
-		return nVehicle;
+		return nHouse;
 	}
 
-	public ArrayList<Vehicle> getByDistance(Connection connection,
+	public ArrayList<House> getByDistance(Connection connection,
 			String category_id, Double lat, Double lon, Double distance,
 			int offset) throws Exception {
 		// TODO Auto-generated method stub
-		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
+		ArrayList<House> datas = new ArrayList<House>();
 
 		try {
 
 			PreparedStatement ps = connection
-					.prepareStatement(" SELECT * FROM (SELECT * FROM testcraighslist.vehicle where vehicle.category_id = ? AND vehicle.lat > ? AND vehicle.lat < ? Order by vehicle.lat) AS distance WHERE distance.lon > ? AND distance.lon < ? ORDER BY distance.lon LIMIT 10 OFFSET ?");
-			
-			ps.setString(1, category_id);
+					.prepareStatement("SELECT * FROM testcraighslist.house WHERE house.lat > ? AND house.lat < ? AND house.lon > ? AND house.lon < ? ORDER BY house.created_at DESC LIMIT 10 OFFSET ?");
+			ps.setString(1, String.valueOf(lat
+					- (distance * 360 / Constant.earth / Constant.pi / 2)));
 			ps.setString(2, String.valueOf(lat
-					- (distance * 360 / Constant.earth / Constant.pi / 2)));
-			System.out.println(String.valueOf(lat
-					- (distance * 360 / Constant.earth / Constant.pi / 2)));
-
-			ps.setString(3, String.valueOf(lat
 					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
-			System.out.println(String.valueOf(lat
-					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
-
+			ps.setString(3, String.valueOf(lon
+					- (distance * 360 / Constant.earth / Constant.pi / 2)));
 			ps.setString(4, String.valueOf(lon
-					- (distance * 360 / Constant.earth / Constant.pi / 2)));
-			System.out.println(String.valueOf(lon
-					- (distance * 360 / Constant.earth / Constant.pi / 2)));
-
-			ps.setString(5, String.valueOf(lon
 					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
-			System.out.println(String.valueOf(lon
-					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
-			ps.setLong(6, offset);
+			ps.setLong(5, offset);
 			System.out.println(String.valueOf(lat
 					+ (distance * 360 / Constant.earth / Constant.pi / 2)));
 			System.out.println(ps.getQueryTimeout());
-
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Vehicle c = new Vehicle();
+				House c = new House();
 				c.setId(rs.getString("id"));
 				c.setUser_id(rs.getString("user_id"));
 				c.setTitle(rs.getString("title"));
@@ -524,12 +525,12 @@ public class VehicleObject {
 		int care_num = 0;
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("UPDATE `testcraighslist`.`vehicle` SET `care_num` = care_num + 1 WHERE `id`= ? AND `category_id` = ?;");
+					.prepareStatement("UPDATE `testcraighslist`.`house` SET `care_num` = care_num + 1 WHERE `id`= ? AND `category_id` = ?;");
 			ps.setString(1, post_id);
 			ps.setString(2, category_id);
-
+			
 			ps.executeUpdate();
-
+			
 			if (user_id != null) {
 
 				PreparedStatement check = connection
@@ -537,9 +538,9 @@ public class VehicleObject {
 				check.setString(1, user_id);
 				check.setString(2, password);
 				ResultSet rs = check.executeQuery();
-
+				
 				if (rs.next()) {
-
+					
 					PreparedStatement ps1 = connection
 							.prepareStatement("INSERT INTO `testcraighslist`.`care_sequence` (`category_id`, `post_id`, `user_id`) VALUES (?, ?, ?);");
 					ps1.setString(1, category_id);
@@ -549,19 +550,18 @@ public class VehicleObject {
 					ps1.executeUpdate();
 				}
 			}
-
-			PreparedStatement ps2 = connection
-					.prepareStatement("SELECT `care_num` FROM `testcraighslist`.`vehicle` WHERE `id`= ? AND `category_id` = ?;");
+			
+			PreparedStatement ps2 = connection.prepareStatement("SELECT `care_num` FROM `testcraighslist`.`house` WHERE `id`= ? AND `category_id` = ?;");
 			ps2.setString(1, post_id);
 			ps2.setString(2, category_id);
-
+			
 			ResultSet rs2 = ps2.executeQuery();
-
+			
 			if (rs2.next())
 				care_num = rs2.getInt(1);
 			connection.close();
 			return care_num;
-
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
@@ -575,16 +575,16 @@ public class VehicleObject {
 			String post_id, String user_id, String password) throws Exception {
 		// TODO Auto-generated method stub
 		int care_num = 0;
-
+		
 		try {
 			PreparedStatement ps = connection
-					.prepareStatement("UPDATE `testcraighslist`.`vehicle` SET `care_num` = care_num - 1 WHERE `id`=? AND `category_id` = ?;");
+					.prepareStatement("UPDATE `testcraighslist`.`house` SET `care_num` = care_num - 1 WHERE `id`=? AND `category_id` = ?;");
 
 			ps.setString(1, post_id);
 			ps.setString(2, category_id);
-
+			
 			ps.executeUpdate();
-
+			
 			if (user_id != null) {
 
 				PreparedStatement check = connection
@@ -595,7 +595,7 @@ public class VehicleObject {
 
 				if (rs.next()) {
 					System.out.println(rs.getString("email"));
-
+					
 					PreparedStatement ps1 = connection
 							.prepareStatement("DELETE FROM `testcraighslist`.`care_sequence` WHERE `category_id` = ? AND `post_id` = ? AND `user_id` = ?;");
 					ps1.setString(1, category_id);
@@ -605,19 +605,18 @@ public class VehicleObject {
 					ps1.executeUpdate();
 				}
 			}
-
-			PreparedStatement ps2 = connection
-					.prepareStatement("SELECT `care_num` FROM `testcraighslist`.`vehicle` WHERE `id`= ? AND `category_id` = ?;");
+			
+			PreparedStatement ps2 = connection.prepareStatement("SELECT `care_num` FROM `testcraighslist`.`house` WHERE `id`= ? AND `category_id` = ?;");
 			ps2.setString(1, post_id);
 			ps2.setString(2, category_id);
-
+			
 			ResultSet rs2 = ps2.executeQuery();
-
+			
 			if (rs2.next())
 				care_num = rs2.getInt(1);
 			connection.close();
 			return care_num;
-
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
@@ -627,10 +626,10 @@ public class VehicleObject {
 		return care_num;
 	}
 	
-	public ArrayList<Vehicle> getVehicleByKeyWord(Connection connection,
+	public ArrayList<House> getHouseByKeyWord(Connection connection,
 			String category_id, String keyword, String location_id, String type)
 			throws Exception {
-		ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+		ArrayList<House> houses = new ArrayList<House>();
 
 		ArrayList<String> list = new ArrayList<String>();
 
@@ -646,23 +645,23 @@ public class VehicleObject {
 		}
 
 		try {
-			String query = "SELECT * FROM testcraighslist.vehicle WHERE vehicle.category_id = " + category_id + " AND ";
+			String query = "SELECT * FROM testcraighslist.house WHERE house.category_id = " + category_id + " AND ";
 			StringBuilder builder = new StringBuilder(query);
 			for (int i = 0; i < list.size(); i++) {
 				if (i == list.size() - 1) {
-					builder.append("vehicle.title LIKE '%" + list.get(i) + "%'");
+					builder.append("house.title LIKE '%" + list.get(i) + "%'");
 					break;
 				}
 
-				builder.append("vehicle.title LIKE '%" + list.get(i) + "%'"
+				builder.append("house.title LIKE '%" + list.get(i) + "%'"
 						+ "OR ");
 
 			}
 
 			if (location_id != null)
-				builder.append(" AND vehicle.location_id = " + location_id);
+				builder.append(" AND house.location_id = " + location_id);
 			if (type != null)
-				builder.append(" AND vehicle.type = " + type);
+				builder.append(" AND house.type = " + type);
 
 			query = builder.toString();
 			System.out.println(query);
@@ -670,7 +669,7 @@ public class VehicleObject {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Vehicle c = new Vehicle();
+				House c = new House();
 				c.setId(rs.getString("id"));
 				c.setUser_id(rs.getString("user_id"));
 				c.setTitle(rs.getString("title"));
@@ -708,11 +707,11 @@ public class VehicleObject {
 				if (rs.getString("phone_num") != null)
 					c.setPhone_num(rs.getString("phone_num"));
 
-				vehicles.add(c);
+				houses.add(c);
 			}
 			
 			connection.close();
-			return vehicles;
+			return houses;
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw e;

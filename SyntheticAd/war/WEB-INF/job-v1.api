@@ -40,6 +40,27 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "job.getJobById" : {
+      "path" : "job/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.getJob",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "job.jobcreate" : {
       "path" : "job",
       "httpMethod" : "POST",
@@ -57,6 +78,138 @@
         },
         "body" : "autoTemplate(backendRequest)",
         "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "job.decreaseCareNum" : {
+      "path" : "jobDeCreaseCareNum",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.deCreaseCareNum",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "job.increaseCareNum" : {
+      "path" : "jobInCreaseCareNum",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.inCreaseCareNum",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "job.jobByKeyword" : {
+      "path" : "jobcollection/{category_id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.getJobByKeyword",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "keyword" : {
+            "type" : "string",
+            "required" : false
+          },
+          "location_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "type" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "job.getjob" : {
+      "path" : "jobcollection/{category_id}/{location_id}/{type}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.getJobLocationAndCategory",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "location_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "type" : {
+            "type" : "string",
+            "required" : true
+          },
+          "offset" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -81,39 +234,6 @@
       },
       "response" : {
         "body" : "empty"
-      }
-    },
-    "job.getjob" : {
-      "path" : "jobcollection/{category_id}/{location_id}/{type}/{offset}",
-      "httpMethod" : "GET",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.kenshin.SyntheticAd.model.JobObjectManager.getJobLocationAndCategory",
-      "request" : {
-        "parameters" : {
-          "category_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "location_id" : {
-            "type" : "string",
-            "required" : true
-          },
-          "type" : {
-            "type" : "string",
-            "required" : true
-          },
-          "offset" : {
-            "type" : "string",
-            "required" : true
-          }
-        },
-        "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
       }
     }
   },
@@ -211,6 +331,11 @@
           "$ref" : "Job"
         }
       },
+      "com.kenshin.SyntheticAd.model.JobObjectManager.getJob" : {
+        "response" : {
+          "$ref" : "Job"
+        }
+      },
       "com.kenshin.SyntheticAd.model.JobObjectManager.createJob" : {
         "request" : {
           "$ref" : "Job"
@@ -219,12 +344,27 @@
           "$ref" : "Job"
         }
       },
-      "com.kenshin.SyntheticAd.model.JobObjectManager.deleteJob" : {
+      "com.kenshin.SyntheticAd.model.JobObjectManager.deCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Job"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.JobObjectManager.inCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Job"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.JobObjectManager.getJobByKeyword" : {
+        "response" : {
+          "$ref" : "JobCollection"
+        }
       },
       "com.kenshin.SyntheticAd.model.JobObjectManager.getJobLocationAndCategory" : {
         "response" : {
           "$ref" : "JobCollection"
         }
+      },
+      "com.kenshin.SyntheticAd.model.JobObjectManager.deleteJob" : {
       }
     }
   }

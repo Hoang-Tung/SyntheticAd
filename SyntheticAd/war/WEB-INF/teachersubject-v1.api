@@ -1,0 +1,78 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://even-envoy-89503.appspot.com/_ah/api",
+  "name" : "teachersubject",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://even-envoy-89503.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "teachersubject.teachersubjects" : {
+      "path" : "teachersubjectcollection",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.TeacherSubjectObjectManager.getAll",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "TeacherSubject" : {
+        "id" : "TeacherSubject",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "subject_name" : {
+            "type" : "string"
+          }
+        }
+      },
+      "TeacherSubjectCollection" : {
+        "id" : "TeacherSubjectCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "TeacherSubject"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.kenshin.SyntheticAd.model.TeacherSubjectObjectManager.getAll" : {
+        "response" : {
+          "$ref" : "TeacherSubjectCollection"
+        }
+      }
+    }
+  }
+}

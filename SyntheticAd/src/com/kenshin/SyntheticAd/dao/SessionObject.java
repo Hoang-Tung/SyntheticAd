@@ -20,6 +20,7 @@ public class SessionObject {
 				System.out.println("email " + rs.getString("email"));
 				data.setEmail(rs.getString("email"));
 				if (user.getPassword().equals(rs.getString("password"))) {
+					data.setPassword(user.getPassword());
 					data.setId(rs.getString("id"));
 					data.setPhone(rs.getString("phone"));
 					data.setPoint(rs.getString("point"));

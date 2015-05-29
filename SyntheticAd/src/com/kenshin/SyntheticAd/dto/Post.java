@@ -7,18 +7,25 @@ import java.util.Date;
 
 public class Post {
 	private int id;
-	private int user_id;
-	private int subcategory_id;
-	private String info;
-	private int type;
+	private int category_id;
+	private String title;
+	private String description;
 	private float price;
-	private float lon;
-	private float lat;
+	private int condition;
+	private int user_id;
 	private int location_id;
-	private String image_url;
+	private Double lat;
+	private Double lon;
+	private int extend_type;
+	private int care_num;
 	private Date created_at;
 	private Date updated_at;
-	private int condition;
+	private float size;
+	private String pass;
+	private String imageUrl;
+	private int type;
+	private String address;
+	private String phone_num;
 	
 	public int getId() {
 		return id;
@@ -26,29 +33,17 @@ public class Post {
 	public void setId(String id) {
 		this.id = Integer.parseInt(id);
 	}
-	public int getUser_id() {
-		return user_id;
+	public int getCategory_id() {
+		return category_id;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = Integer.parseInt(user_id);
+	public void setCategory_id(String category_id) {
+		this.category_id = Integer.parseInt(category_id);
 	}
-	public int getSubcategory_id() {
-		return subcategory_id;
+	public String getDescription() {
+		return description;
 	}
-	public void setSubcategory_id(String subcategory_id) {
-		this.subcategory_id = Integer.parseInt(subcategory_id);
-	}
-	public String getInfo() {
-		return info;
-	}
-	public void setInfo(String info) {
-		this.info = info;
-	}
-	public int getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = Integer.parseInt(type);
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public float getPrice() {
 		return price;
@@ -56,17 +51,17 @@ public class Post {
 	public void setPrice(String price) {
 		this.price = Float.parseFloat(price);
 	}
-	public float getLon() {
-		return lon;
+	public int getCondition() {
+		return condition;
 	}
-	public void setLon(String lon) {
-		this.lon = Float.parseFloat(lon);
+	public void setCondition(String condition) {
+		this.condition = Integer.parseInt(condition);
 	}
-	public float getLat() {
-		return lat;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setLat(String lat) {
-		this.lat = Float.parseFloat(lat);
+	public void setUser_id(String user_id) {
+		this.user_id = Integer.parseInt(user_id);
 	}
 	public int getLocation_id() {
 		return location_id;
@@ -74,11 +69,29 @@ public class Post {
 	public void setLocation_id(String location_id) {
 		this.location_id = Integer.parseInt(location_id);
 	}
-	public String getImage_url() {
-		return image_url;
+	public Double getLat() {
+		return lat;
 	}
-	public void setImage_url(String image_url) {
-		this.image_url = image_url;
+	public void setLat(String lat) {
+		this.lat = Double.parseDouble(lat);
+	}
+	public Double getLon() {
+		return lon;
+	}
+	public void setLon(String lon) {
+		this.lon = Double.parseDouble(lon);
+	}
+	public int getExtend_type() {
+		return extend_type;
+	}
+	public void setExtend_type(String extend_type) {
+		this.extend_type = Integer.parseInt(extend_type);
+	}
+	public int getCare_num() {
+		return care_num;
+	}
+	public void setCare_num(String care_num) {
+		this.care_num = Integer.parseInt(care_num);
 	}
 	public Date getCreated_at() {
 		return created_at;
@@ -89,14 +102,9 @@ public class Post {
 			this.created_at = simpleDateFormat.parse(created_at);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			System.out.println("exception found");
 			e.printStackTrace();
 		}
-	}
-	public int getCondition() {
-		return condition;
-	}
-	public void setCondition(String condition) {
-		this.condition = Integer.parseInt(condition);
 	}
 	public Date getUpdated_at() {
 		return updated_at;
@@ -109,6 +117,48 @@ public class Post {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public float getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = Float.parseFloat(size);
+	}
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public int getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = Integer.parseInt(type);
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getPass() {
+		return pass;
+	}
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+	public String getPhone_num() {
+		return phone_num;
+	}
+	public void setPhone_num(String phone_num) {
+		this.phone_num = phone_num;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

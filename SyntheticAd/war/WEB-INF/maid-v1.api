@@ -24,6 +24,72 @@
     "maxAge" : 0
   },
   "methods" : {
+    "maid.decreaseCareNum" : {
+      "path" : "maidDeCreaseCareNum",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.deCreaseCareNum",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "maid.increaseCareNum" : {
+      "path" : "maidInCreaseCareNum",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.inCreaseCareNum",
+      "request" : {
+        "parameters" : {
+          "category_id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "id" : {
+            "type" : "string",
+            "required" : true
+          },
+          "user_id" : {
+            "type" : "string",
+            "required" : false
+          },
+          "password" : {
+            "type" : "string",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "maid.maidcreate" : {
       "path" : "maid",
       "httpMethod" : "POST",
@@ -62,6 +128,27 @@
         "body" : "autoTemplate(backendResponse)"
       }
     },
+    "maid.getmaidbyid" : {
+      "path" : "maid/{post_id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.kenshin.SyntheticAd.model.MaidObjectManager.getMaidByID",
+      "request" : {
+        "parameters" : {
+          "post_id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "maid.maiddelete" : {
       "path" : "maid/{id}",
       "httpMethod" : "DELETE",
@@ -84,7 +171,7 @@
       }
     },
     "maid.getmaidbylocationandcategory" : {
-      "path" : "maidcollection/{category_id}/{location_id}/{type}/{offset}",
+      "path" : "maidcollection/{category_id}/{location_id}/{type}",
       "httpMethod" : "GET",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
@@ -107,7 +194,7 @@
           },
           "offset" : {
             "type" : "string",
-            "required" : true
+            "required" : false
           }
         },
         "body" : "empty"
@@ -204,6 +291,79 @@
           "end_time" : {
             "type" : "string",
             "format" : "date-time"
+          },
+          "maid" : {
+            "$ref" : "Job"
+          }
+        }
+      },
+      "Job" : {
+        "id" : "Job",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "category_id" : {
+            "type" : "integer"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "condition" : {
+            "type" : "integer"
+          },
+          "user_id" : {
+            "type" : "integer"
+          },
+          "location_id" : {
+            "type" : "integer"
+          },
+          "lat" : {
+            "type" : "number"
+          },
+          "lon" : {
+            "type" : "number"
+          },
+          "extend_type" : {
+            "type" : "integer"
+          },
+          "care_num" : {
+            "type" : "integer"
+          },
+          "pass" : {
+            "type" : "string"
+          },
+          "created_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updated_at" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "size" : {
+            "type" : "number",
+            "format" : "float"
+          },
+          "imageUrl" : {
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "integer"
+          },
+          "address" : {
+            "type" : "string"
+          },
+          "phone_num" : {
+            "type" : "string"
           }
         }
       },
@@ -221,6 +381,16 @@
       }
     },
     "methods" : {
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.deCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Maid"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.inCreaseCareNum" : {
+        "response" : {
+          "$ref" : "Maid"
+        }
+      },
       "com.kenshin.SyntheticAd.model.MaidObjectManager.insertMaid" : {
         "request" : {
           "$ref" : "Maid"
@@ -233,6 +403,11 @@
         "request" : {
           "$ref" : "Maid"
         },
+        "response" : {
+          "$ref" : "Maid"
+        }
+      },
+      "com.kenshin.SyntheticAd.model.MaidObjectManager.getMaidByID" : {
         "response" : {
           "$ref" : "Maid"
         }

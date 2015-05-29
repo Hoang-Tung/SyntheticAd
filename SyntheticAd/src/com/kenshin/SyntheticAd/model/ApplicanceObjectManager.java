@@ -1,12 +1,7 @@
 package com.kenshin.SyntheticAd.model;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -14,21 +9,22 @@ import com.google.api.server.spi.config.Named;
 import com.google.api.server.spi.config.Nullable;
 import com.kenshin.SyntheticAd.database.Database;
 import com.kenshin.SyntheticAd.dao.CategoryObject;
-import com.kenshin.SyntheticAd.dao.VehicleObject;
+import com.kenshin.SyntheticAd.dao.ApplicanceObject;
+import com.kenshin.SyntheticAd.dao.ApplicanceObject;
 import com.kenshin.SyntheticAd.dto.Category;
-import com.kenshin.SyntheticAd.dto.Vehicle;
-import com.kenshin.SyntheticAd.dto.Vehicle;
+import com.kenshin.SyntheticAd.dto.Applicance;
+import com.kenshin.SyntheticAd.dto.Applicance;
 
-@Api(name = "vehicle", version = "v1")
-public class VehicleObjectManager {
-//	@ApiMethod(name = "vehicles")
-//	public ArrayList<Vehicle> getAll(@Named("category_id") String category_id ,@Named("offset") @Nullable String offset)
+@Api(name = "applicance", version = "v1")
+public class ApplicanceObjectManager {
+//	@ApiMethod(name = "applicances")
+//	public ArrayList<Applicance> getAll(@Named("offset") String offset)
 //			throws Exception {
-//		ArrayList<Vehicle> datas = null;
+//		ArrayList<Applicance> datas = null;
 //		try {
 //			Database database = new Database();
 //			Connection connection = database.getConnect();
-//			VehicleObject object = new VehicleObject();
+//			ApplicanceObject object = new ApplicanceObject();
 //			datas = object.getAll(connection, offset);
 //		} catch (Exception e) {
 //			// TODO: handle exception
@@ -36,32 +32,32 @@ public class VehicleObjectManager {
 //		return datas;
 //	}
 
-	@ApiMethod(name = "vehicle")
-	public Vehicle getVehicle(@Named("id") String id) throws Exception {
-		Vehicle vehicle = null;
+	@ApiMethod(name = "applicance")
+	public Applicance getApplicance(@Named("id") String id) throws Exception {
+		Applicance applicance = null;
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			vehicle = object.getVehicle(con, id);
+			ApplicanceObject object = new ApplicanceObject();
+			applicance = object.getApplicance(con, id);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return vehicle;
+		return applicance;
 	}
 
-	@ApiMethod(name = "vehicleByCategoryAndLocation")
-	public ArrayList<Vehicle> getVihicleByCategoryAndLocation(
+	@ApiMethod(name = "applicanceByCategoryAndLocation")
+	public ArrayList<Applicance> getVihicleByCategoryAndLocation(
 			@Named("category_id") String category_id,
 			@Named("location_id") String location_id,
 			@Named("type") String type, @Named("offset") @Nullable String offset)
 			throws Exception {
-		ArrayList<Vehicle> datas = null;
+		ArrayList<Applicance> datas = null;
 		try {
 			Database database = new Database();
 			Connection connection = database.getConnect();
-			VehicleObject object = new VehicleObject();
+			ApplicanceObject object = new ApplicanceObject();
 			datas = object.getByLocationAndCategory(connection, category_id,
 					location_id, type, offset);
 		} catch (Exception e) {
@@ -70,18 +66,18 @@ public class VehicleObjectManager {
 		return datas;
 	}
 
-	@ApiMethod(name = "vehicleByDistance")
-	public ArrayList<Vehicle> getVehicleByDistance(
+	@ApiMethod(name = "applicanceByDistance")
+	public ArrayList<Applicance> getApplicanceByDistance(
 			@Named("category_id") @Nullable String category_id,
 			@Named("distance") @Nullable Double distance,
 			@Named("offset") @Nullable int offset,
 			@Named("lat") @Nullable Double lat,
 			@Named("lon") @Nullable Double lon) throws Exception {
-		ArrayList<Vehicle> datas = null;
+		ArrayList<Applicance> datas = null;
 		try {
 			Database database = new Database();
 			Connection connection = database.getConnect();
-			VehicleObject object = new VehicleObject();
+			ApplicanceObject object = new ApplicanceObject();
 			datas = object.getByDistance(connection, category_id, lat, lon,
 					distance, offset);
 		} catch (Exception e) {
@@ -90,97 +86,97 @@ public class VehicleObjectManager {
 		return datas;
 	}
 
-	@ApiMethod(name = "vehiclecreate")
-	public Vehicle insertVehicle(Vehicle vehicle,
+	@ApiMethod(name = "applicancecreate")
+	public Applicance insertApplicance(Applicance applicance,
 			@Named("password") @Nullable String password) throws Exception {
-		Vehicle nVehicle = new Vehicle();
+		Applicance nApplicance = new Applicance();
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			nVehicle = object.insertVehicle(con, vehicle, password);
+			ApplicanceObject object = new ApplicanceObject();
+			nApplicance = object.insertApplicance(con, applicance, password);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return nVehicle;
+		return nApplicance;
 	}
 
-	@ApiMethod(name = "vehicleupdate")
-	public Vehicle updateViVehicle(Vehicle vehicle) throws Exception {
-		Vehicle nVehicle = new Vehicle();
+	@ApiMethod(name = "applicanceupdate")
+	public Applicance updateViApplicance(Applicance applicance) throws Exception {
+		Applicance nApplicance = new Applicance();
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			nVehicle = object.updateVehicle(con, vehicle);
+			ApplicanceObject object = new ApplicanceObject();
+			nApplicance = object.updateApplicance(con, applicance);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return nVehicle;
+		return nApplicance;
 	}
 
-	@ApiMethod(name = "vehicledelete")
-	public void deleteVehicle(@Named("id") String id) throws Exception {
+	@ApiMethod(name = "applicancedelete")
+	public void deleteApplicance(@Named("id") String id) throws Exception {
 		Database database = new Database();
 		try {
 			Connection con = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			object.deleteVehicle(con, id);
+			ApplicanceObject object = new ApplicanceObject();
+			object.deleteApplicance(con, id);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
-	@ApiMethod(name = "increaseCareNum", path="vehicleInCreaseCareNum")
-	public Vehicle inCreaseCareNum(@Named("category_id") String category_id,
+	@ApiMethod(name = "increaseCareNum", path="applicanceInCreaseCareNum")
+	public Applicance inCreaseCareNum(@Named("category_id") String category_id,
 			@Named("id") String id, @Named("user_id") @Nullable String user_id,
 			@Named("password") @Nullable String password) {
 		Database database = new Database();
-		Vehicle n_Vehicle = new Vehicle();
+		Applicance n_Applicance = new Applicance();
 		try {
 			Connection con = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			n_Vehicle.setCare_num("" + object.increaseCareNum(con, category_id, id, user_id, password));
+			ApplicanceObject object = new ApplicanceObject();
+			n_Applicance.setCare_num("" + object.increaseCareNum(con, category_id, id, user_id, password));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return n_Vehicle;
+		return n_Applicance;
 	}
 
-	@ApiMethod(name = "decreaseCareNum", path="vehicleDeCreaseCareNum")
-	public Vehicle deCreaseCareNum(@Named("category_id") String category_id,
+	@ApiMethod(name = "decreaseCareNum", path="applicanceDeCreaseCareNum")
+	public Applicance deCreaseCareNum(@Named("category_id") String category_id,
 			@Named("id") String id, @Named("user_id") @Nullable String user_id,
 			@Named("password") @Nullable String password) {
 		Database database = new Database();
-		Vehicle n_Vehicle = new Vehicle();
+		Applicance n_Applicance = new Applicance();
 		System.out.println(user_id + " pp" + password);
 		try {
 			Connection con = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			n_Vehicle.setCare_num("" + object.decreaseCareNum(con, category_id, id, user_id, password));
+			ApplicanceObject object = new ApplicanceObject();
+			n_Applicance.setCare_num("" + object.decreaseCareNum(con, category_id, id, user_id, password));
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return n_Vehicle;
+		return n_Applicance;
 	}
 	
-	@ApiMethod(name = "vehicleByKeyword")
-	public ArrayList<Vehicle> getVehicleByKeyword(@Named("category_id") String category_id,
+	@ApiMethod(name = "applicanceByKeyword")
+	public ArrayList<Applicance> getApplicanceByKeyword(@Named("category_id") String category_id,
 			@Named("keyword") @Nullable String keyword,
 			@Named("location_id") @Nullable String location_id,
 			@Named("type") @Nullable String type) {
-		ArrayList<Vehicle> datas = new ArrayList<Vehicle>();
+		ArrayList<Applicance> datas = new ArrayList<Applicance>();
 
 		try {
 			Database database = new Database();
 			Connection connection = database.getConnect();
-			VehicleObject object = new VehicleObject();
-			datas = object.getVehicleByKeyWord(connection, category_id, keyword, location_id,
+			ApplicanceObject object = new ApplicanceObject();
+			datas = object.getApplicanceByKeyWord(connection, category_id, keyword, location_id,
 					type);
 		} catch (Exception e) {
 			// TODO: handle exception
